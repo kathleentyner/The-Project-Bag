@@ -9,8 +9,7 @@ export const Register = ({setIsLoggedIn}) =>{
 
   const [name, setName] = useState();
   const [email, setEmail] = useState();
- 
-
+  
   const registerClick = (e) => {
     e.preventDefault();
    {
@@ -35,7 +34,8 @@ export const Register = ({setIsLoggedIn}) =>{
                <FormGroup>
           <Label for="email">Email</Label>
           <Input id="email" type="text" onChange={e => setEmail(e.target.value)} />
-        </FormGroup>     
+        </FormGroup>
+     
         <FormGroup>
           <Button>Register</Button>
         </FormGroup>

@@ -12,8 +12,8 @@ namespace ProjectBag
 
             builder.Services.AddControllers();
             builder.Services.AddTransient<IUserRepository, UserRepository>();
-            builder.Services.AddTransient<IFiberTagRepository, FiberTagRepository>();
-            builder.Services.AddTransient<IWeightTagRepository, WeightTagRepository>();
+            builder.Services.AddTransient<IFiberRepository, FiberRepository>();
+            builder.Services.AddTransient<IWeightRepository, WeightRepository>();
             builder.Services.AddTransient<IResourceRepository, ResourceRepository>();
             builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
             builder.Services.AddTransient<IProjectYarnRepository, ProjectYarnRepository>();

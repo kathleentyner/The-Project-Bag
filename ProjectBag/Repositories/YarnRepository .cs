@@ -44,12 +44,12 @@ namespace ProjectBag.Repositories
                             Quantity = DbUtils.GetString(reader, "Quantity"),
                             
                        
-                            fiberTag = new FiberTag()
+                            fiberTag = new Fiber()
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
                                 Name = DbUtils.GetString(reader, "Name")
                             },
-                            weightTag = new WeightTag()
+                            weightTag = new Weight()
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
                                 Name = DbUtils.GetString(reader, "Name")
@@ -97,12 +97,12 @@ namespace ProjectBag.Repositories
                             Color = DbUtils.GetString(reader,"Color"),
                             Quantity = DbUtils.GetString(reader,"Quantity"),
                                                         
-                            fiberTag = new FiberTag()
+                            fiberTag = new Fiber()
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
                                 Name = DbUtils.GetString(reader, "Name")
                             },
-                            weightTag = new WeightTag()
+                            weightTag = new Weight()
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
                                 Name = DbUtils.GetString(reader, "Name")

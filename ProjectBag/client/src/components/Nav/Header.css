@@ -1,0 +1,49 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 2em;
+    color: #F6F6F6;
+    overflow: hidden;
+    background-color: rgb(151, 174, 214);
+  }
+  
+  li {
+    float: left;
+  
+    background-color: rgb(151, 174, 214);
+  }
+  
+  .navbar_item {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    background-color: rgb(151, 174, 214);
+  }
+
+  .navbar_link {
+    display: block;
+    color: rgb(17, 38, 75);
+    font-size: 22px;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;    
+    background-color: rgb(151, 174, 214);
+  }
+  
+  /* Change the link color to #111 (black) on hover */
+  .navbar_item :hover {
+    background-color:rgb(213, 219, 230);
+  }
+
+
+  .navbar__logout {
+
+    display: block;    
+    background-color: rgb(151, 174, 214);
+    color: rgb(17, 38, 75);
+    font-size: 22px;
+    padding: 14px 16px;
+    text-decoration: none;
+  }

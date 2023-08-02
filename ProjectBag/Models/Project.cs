@@ -17,8 +17,8 @@ namespace ProjectBag.Models
         public int WeightId { get; set; }
         public int UserId { get; set; }
         public User? user { get; set; }
-        public FiberTag? fiberTag { get; set; }
-        public WeightTag? weightTag {get; set;}
+        public Fiber? fiberTag { get; set; }
+        public Weight? weightTag {get; set;}
         public ProjectYarn? projectYarn { get; set; }
         public List<Yarn> Yarns { get; set; } = new List<Yarn>();//added to get all the tags assigned to a post
 

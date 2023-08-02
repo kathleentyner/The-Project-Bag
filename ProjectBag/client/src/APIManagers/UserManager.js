@@ -6,17 +6,18 @@ import {useState} from "react";
 const apiUrl = "https://localhost:5001";
 
 export const login = (userObject) => {
-  return fetch(`${apiUrl}/api/user/getbyemail?email=${userObject.email}`)
+  return fetch(`${apiUrl}/user/getbyemail?email=${userObject.email}`)
   .then((r) => r.json())
-    .then((userProfile) => {
-      if(userProfile.id){
-        localStorage.setItem("user", JSON.stringify(userProfile));
-        return userProfile
+    .then((user => {
+      if(user.id){
+        localStorage.setItem("user", JSON.stringify(user));
+        return user
       }
       else{
         return undefined
       }
-    });
+    }));
+    
 };
 
 export const logout = () => {
@@ -24,7 +25,7 @@ export const logout = () => {
 };
 
 export const register = (userObject) => {
-  return  fetch(`${apiUrl}/api/user`, {
+  return  fetch(`/user`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

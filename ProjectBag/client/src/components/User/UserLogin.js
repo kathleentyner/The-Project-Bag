@@ -8,7 +8,6 @@ export const Login = ({setIsLoggedIn})=> {
 
   const [email, setEmail] = useState();
 
-
   const loginSubmit = (e) => {
     e.preventDefault();
     login({email})
@@ -18,7 +17,7 @@ export const Login = ({setIsLoggedIn})=> {
       navigate('/')
       }
       else{
-        alert("Invalid email")
+        alert("Invalid email or password")
       }
     })
   };
@@ -30,12 +29,12 @@ export const Login = ({setIsLoggedIn})=> {
           <Label for="email">Email</Label>
           <Input id="email" type="text" onChange={e => setEmail(e.target.value)} />
         </FormGroup>
-       
+        
         <FormGroup>
           <Button>Login</Button>
         </FormGroup>
         <em>
-        Don't Have An Account Yet? <Link to="/register">Register</Link>
+          Not registered? <Link to="/register">Register</Link>
         </em>
       </fieldset>
     </Form>

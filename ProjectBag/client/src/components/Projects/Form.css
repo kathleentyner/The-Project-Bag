@@ -1,0 +1,92 @@
+input {
+    margin: 10px;
+    font-size: large;
+    
+  
+    }
+  .reactionform {
+    overflow: visible;
+    padding-left: 2em;
+    padding-top: 3em;
+    padding-bottom: 3em;
+  }
+  
+  
+    .reactionList{
+      font-size: large;
+      display: flex;
+      flex-direction: column;
+      padding: 50px
+     }
+   .newreaction{
+    font-size: large;
+    display: flex;
+    flex-direction: column
+   }
+   
+    .reactions {
+      font-size: large;
+  
+  
+    }
+  
+    .checkboxes {
+      display: flex;
+      flex-direction: column;
+  
+   
+    }
+  .reactionheader{
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      padding: 15px;
+      font-size: x-large;
+      font-weight: bold;}
+  
+  
+   
+    .field {
+        font-size: medium;
+        color: black ;
+    }
+   input:checked {
+     margin:10px;
+     margin-left:50px
+    
+    }
+    .delete_Button {
+      max-width: 100px;
+      margin-left: 50px;
+    }
+    
+    
+  
+    .submit:hover {background-color: #37b678}
+    
+    .submit:active {
+      background-color: #025d31;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+    }
+   .new{
+       
+      background-color: cornflowerblue;
+      font-size: 14px;
+      color: white;
+      text-align: center;  
+      transition-duration: 0.4s;
+      border-radius: 8px;
+      padding: 50px;
+      margin: 50px;
+      max-width: 150px;
+   
+  }
+  .new:hover {background-color: #0a5bac}
+  
+  .new:active {
+    background-color: #01274d;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }

@@ -10,8 +10,8 @@ namespace ProjectBag.Models
         public string Quantity { get; set; }
         public int FiberId {get; set; }
         public int WeightId { get; set; }
-        public FiberTag fiberTag { get; set; } = new FiberTag();
-        public WeightTag weightTag { get; set; } = new WeightTag();
+        public Fiber fiberTag { get; set; } = new Fiber();
+        public Weight weightTag { get; set; } = new Weight();
         public List<Project> projects { get; set; } = new List<Project>();//added to get all the tags assigned to a post
 
     }

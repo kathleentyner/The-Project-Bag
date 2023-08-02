@@ -56,12 +56,12 @@ namespace ProjectBag.Repositories
                                 Email = DbUtils.GetString(reader, "Email"),
                                 
                             },
-                            fiberTag = new FiberTag()
+                            fiberTag = new Fiber()
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
                                 Name = DbUtils.GetString(reader, "Name")
                             },
-                            weightTag = new WeightTag()
+                            weightTag = new Weight()
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
                                 Name = DbUtils.GetString(reader, "Name")
@@ -88,7 +88,7 @@ namespace ProjectBag.Repositories
                     cmd.CommandText = @"
             
                         SELECT p.Id, p.PatternName, p.Designer, p.PatternUrl AS Pattern, p.PhotoURL AS Photo, p.Notes, p.StartDate, p.EndDate, p.Queued, p.FiberId, p.WeightId, p.UserId, u.Id, u.Name, u.Email, f.Id, w.Id, y.Id AS YarnId, y.Brand, py.Id, py.ProjectId, py.YarnId
-                        FROM Post p                        
+                        FROM Project p                        
                         LEFT JOIN [User] u ON u.Id = p.UserId
                         LEFT JOIN FiberTag f ON f.Id = FiberId
                         LEFT JOIN WeightTag w on w.Id = WeightId
@@ -124,12 +124,12 @@ namespace ProjectBag.Repositories
                                 Email = DbUtils.GetString(reader, "Email"),
 
                             },
-                            fiberTag = new FiberTag()
+                            fiberTag = new Fiber()
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
                                 Name = DbUtils.GetString(reader, "Name")
                             },
-                            weightTag = new WeightTag()
+                            weightTag = new Weight()
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
                                 Name = DbUtils.GetString(reader, "Name")
@@ -169,7 +169,7 @@ namespace ProjectBag.Repositories
                     cmd.CommandText = @"
                         INSERT INTO Project (PatternName, Designer, PatternUrl, PhotoUrl, Notes, StartDate, EndDate, Queued, FiberId, WeightId, UserId)
                         OUTPUT INSERTED.ID
-                        VALUES (@patternName, @designer, @patternUrl, @photoUrl, @startDate, @endDate, @queued, @fiberId, @weightId @userId)";
+                        VALUES (@patternName, @designer, @patternUrl, @photoUrl, @notes, @startDate, @endDate, @queued, @fiberId, @weightId, @userId)";
                     DbUtils.AddParameter(cmd, "@patternName", project.PatternName);
                     DbUtils.AddParameter(cmd, "@designer", project.Designer);
                     DbUtils.AddParameter(cmd, "@patternUrl", project.PatternUrl);
