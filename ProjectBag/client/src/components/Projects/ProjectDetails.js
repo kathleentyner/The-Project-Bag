@@ -104,10 +104,10 @@ export const ProjectDetails = () => {
         <ListItemText primary="Finished" secondary=  {project.endDate} />
       </ListItem>
       <ListItem>
-    <ListItemText primary="Fiber" secondary= {project.fiberId} />
+    <ListItemText primary="Fiber" secondary= {project.fiberTag.name} />
       </ListItem>
       <ListItem> 
-      <ListItemText primary="Yarn Weight" secondary= {project.weightId} />
+      <ListItemText primary="Yarn Weight" secondary= {project.weightTag.name} />
       </ListItem>
     </List>
         </Typography>

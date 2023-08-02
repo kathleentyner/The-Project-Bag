@@ -26,7 +26,7 @@ namespace ProjectBag.Repositories
                 {
                     cmd.CommandText = @"
 
-                        SELECT p.Id, p.PatternName, p.Designer, p.PatternUrl AS Pattern, p.PhotoURL AS Photo, p.Notes, p.StartDate, p.EndDate, p.Queued, p.FiberId, p.WeightId, p.UserId, u.Id, u.Name, u.Email, f.Id, w.Id 
+                        SELECT p.Id, p.PatternName, p.Designer, p.PatternUrl AS Pattern, p.PhotoURL AS Photo, p.Notes, p.StartDate, p.EndDate, p.Queued, p.FiberId, p.WeightId, p.UserId, u.Id, u.Name, u.Email, f.Id AS FID, w.Id AS WID, f.Name AS FName, w.Name AS WName
                         FROM Project p                        
                         LEFT JOIN [User] u ON u.Id = p.UserId
                         LEFT JOIN FiberTag f ON f.Id = FiberId
@@ -56,15 +56,17 @@ namespace ProjectBag.Repositories
                                 Email = DbUtils.GetString(reader, "Email"),
                                 
                             },
+                            FiberId = DbUtils.GetInt(reader,"FiberID"),
                             fiberTag = new Fiber()
                             {
-                                Id = DbUtils.GetInt(reader, "Id"),
-                                Name = DbUtils.GetString(reader, "Name")
+                                Id = DbUtils.GetInt(reader, "FID"),
+                                Name = DbUtils.GetString(reader, "FName")
                             },
+                           WeightId = DbUtils.GetInt(reader,"WeightId"),
                             weightTag = new Weight()
                             {
-                                Id = DbUtils.GetInt(reader, "Id"),
-                                Name = DbUtils.GetString(reader, "Name")
+                                Id = DbUtils.GetInt(reader, "WID"),
+                                Name = DbUtils.GetString(reader, "WName")
                             }
                         });
                     }
