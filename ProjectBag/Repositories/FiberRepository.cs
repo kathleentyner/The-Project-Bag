@@ -92,7 +92,7 @@ namespace ProjectBag.Repositories
                     cmd.CommandText = @"
                         INSERT INTO FiberTag([Name])
                         OUTPUT INSERTED.ID
-                        VALUES (@FiberTag)";
+                        VALUES (@Name)";
 
                     DbUtils.AddParameter(cmd, "@Name", fiberTag.Name);
 

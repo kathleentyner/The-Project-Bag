@@ -12,7 +12,7 @@ namespace ProjectBag.Models
         public string Notes { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public Boolean Queued { get; set; }
+        public bool Queued { get; set; }
         public int FiberId { get; set; }
         public int WeightId { get; set; }
         public int UserId { get; set; }

@@ -26,7 +26,7 @@ namespace ProjectBag.Repositories
                 {
                     cmd.CommandText = @"
 
-                        SELECT y.Id, y.Brand, y.Color, y.Quantity, y.FiberId, y.WeightId, f.Id, w.Id 
+                        SELECT y.Id, y.Brand, y.Color, y.Quantity, y.FiberId, y.WeightId, f.Id AS FID, w.Id AS WID, f.Name AS FName, w.Name AS WName
                         FROM Yarn y                        
                         LEFT JOIN FiberTag f ON f.Id = FiberId
                         LEFT JOIN WeightTag w on w.Id = WeightId
@@ -46,13 +46,13 @@ namespace ProjectBag.Repositories
                        
                             fiberTag = new Fiber()
                             {
-                                Id = DbUtils.GetInt(reader, "Id"),
-                                Name = DbUtils.GetString(reader, "Name")
+                                Id = DbUtils.GetInt(reader, "FID"),
+                                Name = DbUtils.GetString(reader, "FName")
                             },
                             weightTag = new Weight()
                             {
-                                Id = DbUtils.GetInt(reader, "Id"),
-                                Name = DbUtils.GetString(reader, "Name")
+                                Id = DbUtils.GetInt(reader, "WID"),
+                                Name = DbUtils.GetString(reader, "WName")
                             }
                         });
                     }
@@ -75,13 +75,13 @@ namespace ProjectBag.Repositories
                 {
                     cmd.CommandText = @"
             
-                         SELECT y.Id, y.Brand, y.Color, y.Quantity, y.FiberId, y.WeightId, f.Id, w.Id, py.Id, py.ProjectId, py.YarnId, p.Id, p.PatternName
+                         SELECT y.Id, y.Brand, y.Color, y.Quantity, y.FiberId, y.WeightId, f.Id AS FID, w.Id AS WID, f.Name AS FName, w.Name AS WName, py.Id as PYID, py.ProjectId, py.YarnId, p.Id as PID, p.PatternName
                         FROM Yarn y                        
                         LEFT JOIN FiberTag f ON f.Id = FiberId
                         LEFT JOIN WeightTag w on w.Id = WeightId
                         LEFT JOIN ProjectYarn py on py.YarnId = y.Id
-                        LEFT JOIN Project p on p.Id = py.ProjectId
-                          WHERE p.Id = @id"; ;
+                        LEFT JOIN Project p on P.Id = py.ProjectId
+                          WHERE y.Id = @id"; 
 
                     DbUtils.AddParameter(cmd, "@id", id);
 
@@ -96,16 +96,17 @@ namespace ProjectBag.Repositories
                             Brand = DbUtils.GetString(reader, "Brand"),
                             Color = DbUtils.GetString(reader,"Color"),
                             Quantity = DbUtils.GetString(reader,"Quantity"),
-                                                        
+                            FiberId = DbUtils.GetInt(reader, "FiberId"),
+                            WeightId = DbUtils.GetInt(reader, "WeightId"),
                             fiberTag = new Fiber()
                             {
-                                Id = DbUtils.GetInt(reader, "Id"),
-                                Name = DbUtils.GetString(reader, "Name")
+                                Id = DbUtils.GetInt(reader, "FID"),
+                                Name = DbUtils.GetString(reader, "FName")
                             },
                             weightTag = new Weight()
                             {
-                                Id = DbUtils.GetInt(reader, "Id"),
-                                Name = DbUtils.GetString(reader, "Name")
+                                Id = DbUtils.GetInt(reader, "WID"),
+                                Name = DbUtils.GetString(reader, "WName")
                             },
 
                             projects = new List<Project>() //add tag to a new list of tags for the specific post. 
@@ -113,12 +114,14 @@ namespace ProjectBag.Repositories
                     }
 
                     if (DbUtils.IsNotDbNull(reader, "ProjectId") && !yarn.projects.Any(x => x.Id == DbUtils.GetNullableInt(reader, "ProjectId")))
-                    {
+
+
+                        {
                         yarn.projects.Add(new Project
                         {
-                            Id = DbUtils.GetInt(reader, "PatternId"),
+                            Id = DbUtils.GetInt(reader, "PID"),
                             PatternName= DbUtils.GetString(reader, "PatternName"),
-                       
+                            
 
                         });
 

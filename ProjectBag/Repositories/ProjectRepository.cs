@@ -89,14 +89,14 @@ namespace ProjectBag.Repositories
                 {
                     cmd.CommandText = @"
             
-                        SELECT p.Id, p.PatternName, p.Designer, p.PatternUrl AS Pattern, p.PhotoURL AS Photo, p.Notes, p.StartDate, p.EndDate, p.Queued, p.FiberId, p.WeightId, p.UserId, u.Id, u.Name, u.Email, f.Id, w.Id, y.Id AS YarnId, y.Brand, py.Id, py.ProjectId, py.YarnId
+                        SELECT p.Id, p.PatternName, p.Designer, p.PatternUrl AS Pattern, p.PhotoURL AS Photo, p.Notes, p.StartDate, p.EndDate, p.Queued, p.FiberId, p.WeightId, p.UserId, u.Id, u.Name, u.Email, f.Id AS FID, w.Id AS WID, f.Name AS FName, w.Name AS WName, y.Id AS YarnId, y.Brand, py.Id, py.ProjectId, py.YarnId
                         FROM Project p                        
                         LEFT JOIN [User] u ON u.Id = p.UserId
                         LEFT JOIN FiberTag f ON f.Id = FiberId
                         LEFT JOIN WeightTag w on w.Id = WeightId
                         LEFT JOIN ProjectYarn py on py.ProjectId = p.Id
                         LEFT JOIN Yarn y on y.Id = py.YarnId
-                          WHERE p.Id = @id"; ;
+                          WHERE p.Id = @id"; 
 
                     DbUtils.AddParameter(cmd, "@id", id);
 
@@ -128,13 +128,13 @@ namespace ProjectBag.Repositories
                             },
                             fiberTag = new Fiber()
                             {
-                                Id = DbUtils.GetInt(reader, "Id"),
-                                Name = DbUtils.GetString(reader, "Name")
+                                Id = DbUtils.GetInt(reader, "FID"),
+                                Name = DbUtils.GetString(reader, "FName")
                             },
                             weightTag = new Weight()
                             {
-                                Id = DbUtils.GetInt(reader, "Id"),
-                                Name = DbUtils.GetString(reader, "Name")
+                                Id = DbUtils.GetInt(reader, "WID"),
+                                Name = DbUtils.GetString(reader, "WName")
                             },
 
                             Yarns = new List<Yarn>() //add tag to a new list of tags for the specific post. 

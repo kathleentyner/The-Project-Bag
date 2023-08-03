@@ -2,9 +2,9 @@
 import Button from '@mui/material/Button';
 import { useEffect, useState, } from "react"
 import { useNavigate, Link } from "react-router-dom"
-import { getAllProjects, deleteProject } from "../../APIManagers/ProjectManager"
-import { Project } from './Project';
-import "./Project.css"
+import { getAllYarn, deleteYarn } from "../../APIManagers/YarnManager"
+import { Yarn } from './Yarn';
+import "./Yarn.css"
 import CssBaseline from '@mui/material/CssBaseline';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
@@ -15,22 +15,22 @@ import CardMedia from '@mui/material/CardMedia';
 
 
 //list out all the reaction entries
-export const ProjectList = (project) => {
-   const [projects, setProjects] = useState([])
+export const YarnList = (yarn) => {
+   const [yarns, setYarns] = useState([])
 
    const navigate = useNavigate()
 
-   const getProjects = () => {
-    getAllProjects().then(allProjects => setProjects(allProjects));
+   const getYarns = () => {
+    getAllYarn().then(allYarns => setYarns(allYarns));
 }
 
 useEffect(() => {
-  getProjects();
+  getYarns();
 }, [])
 
 
 const create = () => {
-  navigate("/project/new")
+  navigate("/yarn/new")
 }
 const theme = createTheme();
              
@@ -48,10 +48,10 @@ const theme = createTheme();
               color="text.primary"
               gutterBottom
             >
-              What I'm Working On
+              Yarn Stash
             </Typography>
             <Typography variant="h5" align="center" color="text.secondary" paragraph>
-              My Projects
+              My Yarn
             </Typography>
             <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
               {/* Your content here */}
@@ -59,7 +59,7 @@ const theme = createTheme();
           </Container>
           <Box m={1} display="flex" justifyContent="center" alignItems="center">
             <Button onClick={create}>
-              Cast On a New Project
+              Add A New Yarn
             </Button>
           </Box>
         </Box>
@@ -77,33 +77,16 @@ const theme = createTheme();
           },
         }}
       >
-        {projects.map((project) => {
+        {yarns.map((yarn) => {
           return (
-            <section className="card" key={project.id}>
+            <section className="card" key={yarn.id}>
               <header>
-                <h3><Link to={`/project/${project.id}`}>{project.patternName}</Link></h3>
-                <h3>Pattern by: {project.designer}</h3>
+                <h3><Link to={`/yarn/${yarn.id}`}>{yarn.brand}</Link></h3>
+                <h3>Color: {yarn.color}</h3>
               </header>
-              <CardMedia
-                component="img"
-                height="300"
-                width="300"
-                image={project.photoUrl}
-                alt="projects"
-              />
+             
               <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
-                {/* <Button variant="contained" padding={1} align="center" href={`/project/${project.id}/edit`}>
-                  Edit
-                </Button>
-                <Button
-                  variant="outlined"
-                  align="center"
-                  padding={1}
-                  onClick={() => deleteProject(project.id)}
-              
-                >
-                  Delete
-                </Button> */}
+        
               </Stack>
             </section>
           );

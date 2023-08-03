@@ -92,7 +92,7 @@ namespace ProjectBag.Repositories
                     cmd.CommandText = @"
                         INSERT INTO WeightTag([Name])
                         OUTPUT INSERTED.ID
-                        VALUES (@WeightTag)";
+                        VALUES (@Name)";
 
                     DbUtils.AddParameter(cmd, "@Name", weightTag.Name);
 

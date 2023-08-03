@@ -25,8 +25,7 @@ namespace ProjectBag.Repositories
                 {
                     cmd.CommandText = @"
                         SELECT Id, Type, Description, ResourceUrl
-                        FROM Resource
-                        ORDER BY Type ASC";
+                        FROM Resources";
 
                     var reader = cmd.ExecuteReader();
 
@@ -62,7 +61,7 @@ namespace ProjectBag.Repositories
 
                     cmd.CommandText = @"
                         SELECT Id, Type, Description, ResourceUrl
-                        FROM Resource
+                        FROM Resources
                         WHERE Id = @Id"
                     ;
 
@@ -99,9 +98,9 @@ namespace ProjectBag.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        INSERT INTO Resource(Type, Description, ResourceUrl)
+                        INSERT INTO Resources(Type, Description, ResourceUrl)
                         OUTPUT INSERTED.ID
-                        VALUES (@Resource)";
+                        VALUES (@Type, @Description, @ResourceUrl)";
 
                     DbUtils.AddParameter(cmd, "@Type", resource.Type);
                     DbUtils.AddParameter(cmd, "@Description", resource.Description);
@@ -121,7 +120,7 @@ namespace ProjectBag.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        DELETE FROM Resource
+                        DELETE FROM Resources
                         WHERE Id = @Id";
 
                     DbUtils.AddParameter(cmd, "@Id", id);
@@ -140,7 +139,7 @@ namespace ProjectBag.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                       UPDATE Resource
+                       UPDATE Resources
                        SET Type = @Type
                        Set Description = @Description
                         set ResourceUrl = @ResourceUrl

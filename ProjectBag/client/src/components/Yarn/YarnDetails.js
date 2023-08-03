@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import {deleteProject, getProjectById } from "../../APIManagers/ProjectManager"
+import {deleteYarn, getYarnById } from "../../APIManagers/YarnManager"
 import {Alert } from "reactstrap";
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -17,27 +17,27 @@ import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
 
 
-export const ProjectDetails = () => {
-    const [project, setProject] = useState();
+export const YarnDetails = () => {
+    const [yarn, setYarn] = useState();
     const [showAlert, setShowAlert] = useState(false)
     const { id } = useParams();
     const navigate = useNavigate();
    
   
     useEffect(() => {
-      getProjectById(id).then(setProject)
-    
+      getYarnById(id).then(setYarn)
+     
     }, [])
   
-    if (!project) {
+    if (!yarn) {
       return null;
     }
     
   
     const handleDelete = () => {
-      deleteProject(project.id).then(() => {
+      deleteYarn(yarn.id).then(() => {
         setShowAlert(false)
-        navigate(`/project`)
+        navigate(`/yarn`)
       });
     };
   
@@ -45,24 +45,15 @@ export const ProjectDetails = () => {
       setShowAlert(false) 
     }
   
-    const deleteProjectAlert = () => {
+    const deleteYarnAlert = () => {
       return (<>
       <Alert color="danger" key={'danger'}>
-        Are you sure you want to delete this project?
+        Are you sure you want to delete this yarn?
         <br></br><Link onClick={handleDelete}>Yes</Link> / <Link onClick={handleCancel}>No</Link>
       </Alert>
       </>)
     }
-  
-    const deleteButton = () => {
-     
-        return 
-      }
     
- 
-  
-    
-  
     return (
         
         <Grid
@@ -77,48 +68,28 @@ export const ProjectDetails = () => {
         <Grid item xs={3}>
         <Card sx={{ maxWidth:800} }  display ="flex">
    <CardActionArea>
-
-      <CardMedia
-        component="img"
-        height="140"
-        image={project.photoUrl} 
-        alt= "single project"
-      />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {project.patternName}
+          {yarn.brand}
         </Typography>
         <Typography variant="body2" color="text.secondary">
         <List sx={{ width: '100%', maxWidth: 700, bgcolor: 'background.paper' }}>
-        <ListItemText primary="Designer" secondary= {project.designer} />
+        <ListItemText primary="Color" secondary= {yarn.color} />
         <ListItem>
-        <ListItemText primary="Pattern" secondary={project.patternUrl} />
+        <ListItemText primary="Quantity" secondary={yarn.quantity} />
       </ListItem>
       <ListItem>
-    <ListItemText primary="Notes" secondary={project.notes} />
-      </ListItem>
-      <ListItem>
-      <ListItemText primary="Start Date" secondary= {project.startDate} />
-      </ListItem>
-        <ListItem>
-        <ListItemText primary="Finished" secondary=  {project.endDate} />
-      </ListItem>
-      <ListItem>
-    <ListItemText primary="Fiber" secondary= {project.fiberTag.name} />
+    <ListItemText primary="Fiber" secondary= {yarn.fiberTag.name} />
       </ListItem>
       <ListItem> 
-      <ListItemText primary="Yarn Weight" secondary= {project.weightTag.name} />
+      <ListItemText primary="Yarn Weight" secondary= {yarn.weightTag.name} />
       </ListItem>
     </List>
         </Typography>
+       
         <Button variant="contained" 
         padding={1} 
-        align="center"  onClick={() => navigate(`/addyarn/${id}`)}>Add Yarn to Project</Button>
-
-
-        <Button variant="contained" 
-        padding={1} 
-        align="center"  onClick={() => navigate(`/project/edit/${project.id}`)}>Edit</Button>
+        align="center"  onClick={() => navigate(`/yarn/edit/${yarn.id}`)}>Edit</Button>
      
      <><Button
         variant="outline"
@@ -129,7 +100,7 @@ export const ProjectDetails = () => {
         }}> 
         Delete
       </Button>
-        {showAlert && deleteProjectAlert()}
+        {showAlert && deleteYarnAlert()}
         </>
       </CardContent>
     </CardActionArea>

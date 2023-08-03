@@ -4,7 +4,7 @@ input {
     
   
     }
-  .reactionform {
+  .projectform {
     overflow: visible;
     padding-left: 2em;
     padding-top: 3em;
@@ -12,19 +12,19 @@ input {
   }
   
   
-    .reactionList{
+    .projectist{
       font-size: large;
       display: flex;
       flex-direction: column;
       padding: 50px
      }
-   .newreaction{
+   .newproject{
     font-size: large;
     display: flex;
     flex-direction: column
    }
    
-    .reactions {
+    .projectss {
       font-size: large;
   
   
@@ -36,7 +36,7 @@ input {
   
    
     }
-  .reactionheader{
+  .projectheader{
       text-align: left;
       display: flex;
       flex-direction: column;

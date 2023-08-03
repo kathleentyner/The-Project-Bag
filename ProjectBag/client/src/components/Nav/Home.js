@@ -47,7 +47,7 @@ export const Home = () => {
               spacing={2}
               justifyContent="center"
             >
-              <Button href="/projects"variant="contained">Cast On</Button>
+              <Button href="/projects"variant="contained">On the Needles</Button>
               <Button href="/yarn" variant="contained">View Your Stash</Button>
               <Button href="/resources" variant = "contained">Get Inspired</Button>
             </Stack>
