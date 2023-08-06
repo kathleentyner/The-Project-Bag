@@ -145,7 +145,7 @@ namespace ProjectBag.Repositories
                     cmd.CommandText = @"
                         INSERT INTO Yarn (Brand, Color, Quantity, FiberId, WeightId)
                         OUTPUT INSERTED.ID
-                        VALUES (@brand, @color, @quantity, @fiberId, @weightId,)";
+                        VALUES (@brand, @color, @quantity, @fiberId, @weightId)";
                     DbUtils.AddParameter(cmd, "@brand", yarn.Brand);
                     DbUtils.AddParameter(cmd, "@color", yarn.Color);
                     DbUtils.AddParameter(cmd, "@quantity", yarn.Quantity);

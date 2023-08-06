@@ -116,7 +116,7 @@ SET IDENTITY_INSERT [FiberTag] OFF
 
 SET IDENTITY_INSERT [WeightTag] ON
 INSERT INTO [WeightTag] ([Id], [Name])
-VALUES (1, 'Fingering'), (2, 'DK'), (3, 'Worsted'), (4, 'Aran'), (5, 'Bulky')
+VALUES (1, 'Fingering'), (2, 'DK'), (3, 'Worsted'), (4, 'Aran'), (5, 'Bulky') (6, 'Lace') (7, 'Sport') (8, 'Super Bulky')
 SET IDENTITY_INSERT [WeightTag] OFF
 
 SET IDENTITY_INSERT [Project] ON

@@ -44,10 +44,10 @@ namespace ProjectBag.Controllers
         }
 
         //delete a tag
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        [HttpDelete]
+        public IActionResult Delete(ProjectYarn projectYarn)
         {
-            _projectYarnRepository.DeleteProjectYarn(id);
+            _projectYarnRepository.DeleteProjectYarn(projectYarn);
             return NoContent();
         }
 

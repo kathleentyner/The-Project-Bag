@@ -94,10 +94,10 @@ namespace ProjectBag.Repositories
                     cmd.CommandText = @"
                         INSERT INTO ProjectYarn (ProjectId, YarnId)
                         OUTPUT INSERTED.ID 
-                        VALUES (@ProjectYarn)";
+                        VALUES (@ProjectId, @YarnId)";
 
                     DbUtils.AddParameter(cmd, "@ProjectId", projectYarn.ProjectId);
-                    DbUtils.AddParameter(cmd, "YarnId", projectYarn.YarnId);
+                    DbUtils.AddParameter(cmd, "@YarnId", projectYarn.YarnId);
 
                     projectYarn.Id = (int)cmd.ExecuteScalar();
                 }
@@ -105,7 +105,7 @@ namespace ProjectBag.Repositories
         }
 
         //delete 
-        public void DeleteProjectYarn(int id)
+        public void DeleteProjectYarn(ProjectYarn projectYarn)
         {
             using (var conn = Connection)
             {
@@ -114,9 +114,10 @@ namespace ProjectBag.Repositories
                 {
                     cmd.CommandText = @"
                         DELETE FROM ProjectYarn
-                        WHERE Id = @Id";
+                        WHERE ProjectId = @ProjectId AND YarnId = @YarnId";
 
-                    DbUtils.AddParameter(cmd, "@Id", id);
+                    DbUtils.AddParameter(cmd, "@ProjectId", projectYarn.ProjectId);
+                    DbUtils.AddParameter(cmd, "@YarnId", projectYarn.YarnId);
 
                     cmd.ExecuteNonQuery();
                 }

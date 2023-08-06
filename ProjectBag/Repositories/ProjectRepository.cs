@@ -89,7 +89,7 @@ namespace ProjectBag.Repositories
                 {
                     cmd.CommandText = @"
             
-                        SELECT p.Id, p.PatternName, p.Designer, p.PatternUrl AS Pattern, p.PhotoURL AS Photo, p.Notes, p.StartDate, p.EndDate, p.Queued, p.FiberId, p.WeightId, p.UserId, u.Id, u.Name, u.Email, f.Id AS FID, w.Id AS WID, f.Name AS FName, w.Name AS WName, y.Id AS YarnId, y.Brand, py.Id, py.ProjectId, py.YarnId
+                        SELECT p.Id, p.PatternName, p.Designer, p.PatternUrl AS Pattern, p.PhotoURL AS Photo, p.Notes, p.StartDate, p.EndDate, p.Queued, p.FiberId, p.WeightId, p.UserId, u.Id, u.Name, u.Email, f.Id AS FID, w.Id AS WID, f.Name AS FName, w.Name AS WName, y.Id AS YarnId, y.Brand, y.Color, py.Id, py.ProjectId, py.YarnId
                         FROM Project p                        
                         LEFT JOIN [User] u ON u.Id = p.UserId
                         LEFT JOIN FiberTag f ON f.Id = FiberId
@@ -147,6 +147,7 @@ namespace ProjectBag.Repositories
                         {
                             Id = DbUtils.GetInt(reader, "YarnId"),
                             Brand= DbUtils.GetString(reader, "Brand"),
+                            Color = DbUtils.GetString(reader,"Color")
                                                     
 
                         });

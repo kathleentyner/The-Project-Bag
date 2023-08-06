@@ -7,6 +7,13 @@ import { ProjectForm } from "../Projects/ProjectCreate";
 import { YarnList } from "../Yarn/YarnList";
 import { YarnDetails } from "../Yarn/YarnDetails";
 import { ProjectYarn } from "../ProjectYarn/ProjectYarn";
+import { FiberAndWeight} from "../FiberAndWeight/FiberAndWeight";
+import { FiberForm } from "../FiberAndWeight/FiberCreate";
+import { WeightForm } from "../FiberAndWeight/WeightCreate";
+import { YarnForm } from "../Yarn/YarnCreate";
+
+
+
 export const ApplicationViews =() => {
 
     return(
@@ -18,7 +25,12 @@ export const ApplicationViews =() => {
           <Route path="/project/new" element = {<ProjectForm />} />
           <Route path="/yarn" element={<YarnList /> } />      
           <Route path="/yarn/:id" element = {<YarnDetails />} />
-          <Route path="/addyarn/:id" element = {<ProjectYarn />} />
+          <Route path="/manageyarn/:id" element = {<ProjectYarn />} />
+          <Route path ="/notions" element = {<FiberAndWeight /> } />
+          <Route path="/fiber/new" element = {<FiberForm />} />
+          <Route path ="/weight/new" element = {<WeightForm/> } />
+          <Route path ="/yarn/new" element = {<YarnForm/> } />
+
     </Routes>
    );
  

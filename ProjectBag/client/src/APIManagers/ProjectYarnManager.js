@@ -22,20 +22,25 @@ export const addPY = (singlePY) => {
     });
 }
 
-export const deletePY = (id) => {
-    return fetch(`/api/projectyarn/${id}`, {
+export const deletePY = (projectYarn) => {
+    return fetch(baseUrl, {
       method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(projectYarn)
+
     })
       .then(() => getAllPY())
   };
 
-  export const editPY = (py=> {
+//   export const editPY = (py=> {
    
-    return fetch(`/api/projectyarn/${py.Id}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(py)
-    }).then(() => getAllPY())
-  })
+//     return fetch(`/api/projectyarn/${py.Id}`, {
+//         method: "PUT",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify(py)
+//     }).then(() => getAllPY())
+//   })

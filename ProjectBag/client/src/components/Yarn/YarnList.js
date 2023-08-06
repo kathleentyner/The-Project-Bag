@@ -12,16 +12,17 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CardMedia from '@mui/material/CardMedia';
+//import ManageProjectYarn from '../ProjectYarn/ManageProjectYarn';
 
 
 //list out all the reaction entries
-export const YarnList = (yarn) => {
-   const [yarns, setYarns] = useState([])
+export const YarnList = () => {
+   const [yarn, setYarns] = useState([])
 
    const navigate = useNavigate()
 
    const getYarns = () => {
-    getAllYarn().then(allYarns => setYarns(allYarns));
+    getAllYarn().then(yarn => setYarns(yarn));
 }
 
 useEffect(() => {
@@ -76,8 +77,8 @@ const theme = createTheme();
             paddingBottom: 20,
           },
         }}
-      >
-        {yarns.map((yarn) => {
+      >  
+        {yarn.map((yarn) => {
           return (
             <section className="card" key={yarn.id}>
               <header>
@@ -89,9 +90,8 @@ const theme = createTheme();
         
               </Stack>
             </section>
-          );
-        })}
+          )})}
       </Box>
-    </div>
-  );
-    } 
+   </div>
+   )
+      }

@@ -107,13 +107,17 @@ export const ProjectDetails = () => {
     <ListItemText primary="Fiber" secondary= {project.fiberTag.name} />
       </ListItem>
       <ListItem> 
-      <ListItemText primary="Yarn Weight" secondary= {project.weightTag.name} />
+      <ListItemText primary="Weight" secondary= {project.weightTag.name} />
       </ListItem>
+      <ListItem> 
+      <ListItemText primary="Yarn Brand & Color" secondary= {project.yarns.map((yarn) => <p><b> Brand: </b>{yarn.brand}; <b>Colorway: </b>  {yarn.color} </p>)} />
+      </ListItem>
+    
     </List>
         </Typography>
         <Button variant="contained" 
         padding={1} 
-        align="center"  onClick={() => navigate(`/addyarn/${id}`)}>Add Yarn to Project</Button>
+        align="center"  onClick={() => navigate(`/manageyarn/${id}`)}>Manage Yarn</Button>
 
 
         <Button variant="contained" 

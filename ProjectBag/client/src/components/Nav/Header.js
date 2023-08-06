@@ -20,7 +20,7 @@ export const Header = () => {
                     <Tab label="Projects" href="/project" />
                     <Tab label="Yarn" href="/yarn" />
                     <Tab label="Resources" href="/resource" />
-                     <Tab label ="Manage Account" href="/manage" />
+                     <Tab label ="Notions" href="/notions" />
                     </Tabs>
                 </Box>
 )}
