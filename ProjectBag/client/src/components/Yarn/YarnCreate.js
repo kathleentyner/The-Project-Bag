@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react"
-import {useNavigate} from "react-router-dom"
+import {useNavigate } from "react-router-dom"
 import {addYarn} from "../../APIManagers/YarnManager"
 import "./Form.css"
 import Stack from '@mui/material/Stack';
@@ -37,7 +37,7 @@ export const YarnForm = () => {
         brand: "",
         color: "",
         quantity: "",
-        yarnUrl: "",
+        yarnUrl:"",
         fiberId: 0,
         weightId: 0,
         userId: 0
@@ -50,8 +50,8 @@ export const YarnForm = () => {
         const yarnToAPI = {
             Brand: yarn.brand,
             Color: yarn.color,
-            YarnUrl: yarn.yarnUrl,
             Quantity: yarn.quantity,
+            YarnUrl: yarn.yarnUrl,
             FiberId: yarn.fiberId,
             WeightId: yarn.weightId,
             UserId: 1
@@ -153,7 +153,7 @@ const theme = createTheme();
 
                      <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description"><strong>Photo Url: </strong> </label>
+                        <label htmlFor="description"><strong>Add a Photo Url: </strong> </label>
                         <input
                             required autoFocus
                             type="text"

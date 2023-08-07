@@ -11,8 +11,8 @@ import { FiberAndWeight} from "../FiberAndWeight/FiberAndWeight";
 import { FiberForm } from "../FiberAndWeight/FiberCreate";
 import { WeightForm } from "../FiberAndWeight/WeightCreate";
 import { YarnForm } from "../Yarn/YarnCreate";
-
-
+import { YarnEdit } from "../Yarn/YarnEdit"
+import { ProjectEdit } from "../Projects/ProjectEdit"
 
 export const ApplicationViews =() => {
 
@@ -30,6 +30,8 @@ export const ApplicationViews =() => {
           <Route path="/fiber/new" element = {<FiberForm />} />
           <Route path ="/weight/new" element = {<WeightForm/> } />
           <Route path ="/yarn/new" element = {<YarnForm/> } />
+          <Route path ="/yarn/edit/:yarnId" element = {<YarnEdit />} />
+          <Route path ="/project/edit/:projectId" element = {<ProjectEdit />} />
 
     </Routes>
    );

@@ -8,6 +8,7 @@ export const Fiber = ({ fiber }) => {
       <tbody>
         <tr>
           <td>{fiber.name}</td>
+          
     
         </tr>
       </tbody>

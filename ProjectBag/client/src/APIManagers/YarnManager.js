@@ -26,16 +26,15 @@ export const deleteYarn = (id) => {
     return fetch(`/api/yarn/${id}`, {
       method: "DELETE",
     })
-      .then(() => getAllYarn())
-  };
+    .then(() => getAllYarn())
+};
 
-  export const editYarn = (yarn=> {
+  export const editYarn = (yarn) => {
    
-    return fetch(`/api/yarn/${yarn.Id}`, {
+    return fetch(`${baseUrl}/${yarn.id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(yarn)
-    }).then(() => getAllYarn())
-  })
+    })}

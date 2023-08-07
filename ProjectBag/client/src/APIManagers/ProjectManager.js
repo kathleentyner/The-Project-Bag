@@ -31,12 +31,12 @@ export const deleteProject = (id) => {
   };
 
   export const editProject = (project) => {
-   
-    return fetch(`/api/project/${project.Id}`, {
+    //make sure your parameter matches the one you are sending to the API
+    return fetch(`${baseUrl}/${project.Id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(project)
-    }).then(() => getAllProjects())
+    })
 }

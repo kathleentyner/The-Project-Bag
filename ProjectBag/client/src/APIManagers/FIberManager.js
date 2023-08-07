@@ -37,5 +37,5 @@ export const deleteFiber = (id) => {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(fiber)
-    }).then(() => getAllFibers())
-  })
+    })
+});

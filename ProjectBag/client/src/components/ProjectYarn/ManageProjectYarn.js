@@ -44,7 +44,11 @@ const savePY = () => {
 
 // //these components are not working -- they should remove a tag from a post and return the user back to the post details page
 const handleRemoveYarn = () => {
-deletePY() .then(() => {
+  const pjToRemove = {
+      yarnId: yarn.id, 
+      projectId: project.id
+    }
+deletePY(pjToRemove) .then(() => {
 //  setShowAlert(false)
 navigate(`/project/${project.id}`)
   });

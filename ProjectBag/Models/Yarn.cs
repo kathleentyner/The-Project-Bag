@@ -11,10 +11,10 @@ namespace ProjectBag.Models
         public string YarnUrl { get; set; }
         public int FiberId {get; set; }
         public int WeightId { get; set; }
-        public Fiber? fiberTag { get; set; } = new Fiber();
-        public Weight? weightTag { get; set; } = new Weight();
+        public Fiber? fiberTag { get; set; } 
+        public Weight? weightTag { get; set; } 
         public ProjectYarn? projectYarn { get; set; }
-        public List<Project> projects { get; set; } = new List<Project>();//added to get all the tags assigned to a post
+     
 
     }
 }

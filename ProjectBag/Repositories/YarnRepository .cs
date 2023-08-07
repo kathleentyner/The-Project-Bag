@@ -26,7 +26,7 @@ namespace ProjectBag.Repositories
                 {
                     cmd.CommandText = @"
 
-                        SELECT y.Id, y.Brand, y.Color, y.Quantity, y.FiberId, y.WeightId, f.Id AS FID, w.Id AS WID, f.Name AS FName, w.Name AS WName
+                        SELECT y.Id, y.Brand, y.Color, y.Quantity, y.YarnUrl, y.FiberId, y.WeightId, f.Id AS FID, w.Id AS WID, f.Name AS FName, w.Name AS WName
                         FROM Yarn y                        
                         LEFT JOIN FiberTag f ON f.Id = FiberId
                         LEFT JOIN WeightTag w on w.Id = WeightId
@@ -42,7 +42,7 @@ namespace ProjectBag.Repositories
                             Brand= DbUtils.GetString(reader, "Brand"),
                             Color = DbUtils.GetString(reader, "Color"),
                             Quantity = DbUtils.GetString(reader, "Quantity"),
-                            
+                            YarnUrl = DbUtils.GetString(reader, "YarnUrl"),
                        
                             fiberTag = new Fiber()
                             {
@@ -75,12 +75,12 @@ namespace ProjectBag.Repositories
                 {
                     cmd.CommandText = @"
             
-                         SELECT y.Id, y.Brand, y.Color, y.Quantity, y.FiberId, y.WeightId, f.Id AS FID, w.Id AS WID, f.Name AS FName, w.Name AS WName, py.Id as PYID, py.ProjectId, py.YarnId, p.Id as PID, p.PatternName
+                         SELECT y.Id, y.Brand, y.Color, y.Quantity, y.YarnUrl, y.FiberId, y.WeightId, f.Id AS FID, w.Id AS WID, f.Name AS FName, w.Name AS WName, py.Id as PYID, py.ProjectId, py.YarnId
                         FROM Yarn y                        
                         LEFT JOIN FiberTag f ON f.Id = FiberId
                         LEFT JOIN WeightTag w on w.Id = WeightId
                         LEFT JOIN ProjectYarn py on py.YarnId = y.Id
-                        LEFT JOIN Project p on P.Id = py.ProjectId
+                  
                           WHERE y.Id = @id"; 
 
                     DbUtils.AddParameter(cmd, "@id", id);
@@ -96,6 +96,7 @@ namespace ProjectBag.Repositories
                             Brand = DbUtils.GetString(reader, "Brand"),
                             Color = DbUtils.GetString(reader,"Color"),
                             Quantity = DbUtils.GetString(reader,"Quantity"),
+                            YarnUrl =  DbUtils.GetString(reader, "YarnUrl"),
                             FiberId = DbUtils.GetInt(reader, "FiberId"),
                             WeightId = DbUtils.GetInt(reader, "WeightId"),
                             fiberTag = new Fiber()
@@ -109,21 +110,8 @@ namespace ProjectBag.Repositories
                                 Name = DbUtils.GetString(reader, "WName")
                             },
 
-                            projects = new List<Project>() //add tag to a new list of tags for the specific post. 
+                          
                         };
-                    }
-
-                    if (DbUtils.IsNotDbNull(reader, "ProjectId") && !yarn.projects.Any(x => x.Id == DbUtils.GetNullableInt(reader, "ProjectId")))
-
-
-                        {
-                        yarn.projects.Add(new Project
-                        {
-                            Id = DbUtils.GetInt(reader, "PID"),
-                            PatternName= DbUtils.GetString(reader, "PatternName"),
-                            
-
-                        });
 
                     }
 
@@ -143,12 +131,13 @@ namespace ProjectBag.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        INSERT INTO Yarn (Brand, Color, Quantity, FiberId, WeightId)
+                        INSERT INTO Yarn (Brand, Color, Quantity, YarnUrl, FiberId, WeightId)
                         OUTPUT INSERTED.ID
-                        VALUES (@brand, @color, @quantity, @fiberId, @weightId)";
+                        VALUES (@brand, @color, @quantity, @yarnUrl, @fiberId, @weightId)";
                     DbUtils.AddParameter(cmd, "@brand", yarn.Brand);
                     DbUtils.AddParameter(cmd, "@color", yarn.Color);
                     DbUtils.AddParameter(cmd, "@quantity", yarn.Quantity);
+                    DbUtils.AddParameter(cmd, "@yarnUrl", yarn.YarnUrl);
                     DbUtils.AddParameter(cmd, "@fiberId", yarn.FiberId);
                     DbUtils.AddParameter(cmd, "@weightId", yarn.WeightId);
 
@@ -183,6 +172,7 @@ namespace ProjectBag.Repositories
                            SET Brand = @Brand,
                                Color = @Color,
                                Quantity = @Quantity,
+                               YarnUrl = @YarnUrl
                                FiberId = @FiberId,
                                WeightId = @WeightId 
                             
@@ -191,6 +181,7 @@ namespace ProjectBag.Repositories
                     DbUtils.AddParameter(cmd, "@brand", yarn.Brand);
                     DbUtils.AddParameter(cmd, "@color", yarn.Color);
                     DbUtils.AddParameter(cmd, "@quantity", yarn.Quantity);
+                    DbUtils.AddParameter(cmd, "@YarnUrl", yarn.YarnUrl);
                     DbUtils.AddParameter(cmd, "@fiberId", yarn.FiberId);
                     DbUtils.AddParameter(cmd, "@weightId", yarn.WeightId);
                     DbUtils.AddParameter(cmd, "@Id", yarn.Id);

@@ -1,8 +1,8 @@
 import Button from '@mui/material/Button';
-import { useEffect, useState, } from "react"
-import { useNavigate, } from "react-router-dom"
-import { getAllFibers } from '../../APIManagers/FIberManager';
-import { getAllWeights } from '../../APIManagers/WeightManager';
+import { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+import { getAllFibers, deleteFiber } from '../../APIManagers/FIberManager';
+import { getAllWeights, deleteWeight } from '../../APIManagers/WeightManager';
 import "./FiberAndWeight.css"
 import CssBaseline from '@mui/material/CssBaseline';
 import Stack from '@mui/material/Stack';
@@ -26,6 +26,7 @@ export const FiberAndWeight = () => {
    const [fibers, setFibers] = useState([])
    const [weights, setWeights] = useState([])
   const navigate = useNavigate()
+  const { id } = useParams();
 
    const getFibers = () => {
     getAllFibers().then(fibers => setFibers(fibers));
@@ -46,6 +47,29 @@ const newFiber = () => {
 const newWeight = () => {
   navigate("/weight/new")
 }
+
+const handleFiberDelete = () => {
+  deleteFiber(fibers.id).then(() => {
+    setShowAlert(false)
+    navigate(`/notions`)
+  });
+};
+
+const handleCancel = () => {
+  setShowAlert(false) 
+}
+
+const deleteFiberAlert = () => {
+  return (<>
+  <Alert color="danger" key={'danger'}>
+    Are you sure you want to remove this {fibers.name}?
+    <br></br><Link onClick={handleFiberDelete}>Yes</Link> / <Link onClick={handleCancel}>No</Link>
+  </Alert>
+  </>)
+}
+
+
+
 const theme = createTheme();
              
 return (
@@ -90,7 +114,9 @@ Add fiber and weight tags to projects and yarns to stay organized.
          <section class = "fiberlist" key={fiber.id}>
        <List>
           <ListItem disablePadding>
-              <ListItemText primary={fiber.name} />
+              <ListItemText primary={fiber.name} 
+
+              />
           </ListItem>
         </List>
        

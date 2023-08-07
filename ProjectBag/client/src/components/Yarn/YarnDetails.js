@@ -64,10 +64,15 @@ export const YarnDetails = () => {
         justify="center"
         style={{ minHeight: '100vh' }}
        >
-      
         <Grid item xs={3}>
         <Card sx={{ maxWidth:800} }  display ="flex">
    <CardActionArea>
+   <CardMedia
+        component="img"
+        height="140"
+        image={yarn.yarnUrl} 
+        alt= "single project"
+      />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {yarn.brand}

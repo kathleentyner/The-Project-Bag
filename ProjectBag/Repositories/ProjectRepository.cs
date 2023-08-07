@@ -212,7 +212,7 @@ namespace ProjectBag.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        UPDATE Post
+                        UPDATE Project
                            SET PatternName = @PatternName,
                                Designer = @Designer,
                                PatternUrl = @PatternUrl,

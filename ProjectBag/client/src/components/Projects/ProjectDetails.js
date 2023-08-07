@@ -53,16 +53,7 @@ export const ProjectDetails = () => {
       </Alert>
       </>)
     }
-  
-    const deleteButton = () => {
-     
-        return 
-      }
-    
- 
-  
-    
-  
+
     return (
         
         <Grid
@@ -95,7 +86,7 @@ export const ProjectDetails = () => {
         <ListItemText primary="Pattern" secondary={project.patternUrl} />
       </ListItem>
       <ListItem>
-    <ListItemText primary="Notes" secondary={project.notes} />
+    <ListItemText primary="Needles Used and Notes" secondary={project.notes} />
       </ListItem>
       <ListItem>
       <ListItemText primary="Start Date" secondary= {project.startDate} />
