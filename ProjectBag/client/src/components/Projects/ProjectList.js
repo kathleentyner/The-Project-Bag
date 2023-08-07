@@ -95,15 +95,7 @@ const theme = createTheme();
                 {/* <Button variant="contained" padding={1} align="center" href={`/project/${project.id}/edit`}>
                   Edit
                 </Button>
-                <Button
-                  variant="outlined"
-                  align="center"
-                  padding={1}
-                  onClick={() => deleteProject(project.id)}
-              
-                >
-                  Delete
-                </Button> */}
+ */}
               </Stack>
             </section>
           );

@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button';
 import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { getAllFibers, deleteFiber } from '../../APIManagers/FIberManager';
 import { getAllWeights, deleteWeight } from '../../APIManagers/WeightManager';
 import "./FiberAndWeight.css"
@@ -17,7 +17,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
-
+import {Alert } from "reactstrap";
 
 
 
@@ -25,8 +25,10 @@ import Divider from '@mui/material/Divider';
 export const FiberAndWeight = () => {
    const [fibers, setFibers] = useState([])
    const [weights, setWeights] = useState([])
+   const [weight, updateWeight] = useState([])
   const navigate = useNavigate()
-  const { id } = useParams();
+ 
+
 
    const getFibers = () => {
     getAllFibers().then(fibers => setFibers(fibers));
@@ -48,26 +50,18 @@ const newWeight = () => {
   navigate("/weight/new")
 }
 
-const handleFiberDelete = () => {
-  deleteFiber(fibers.id).then(() => {
-    setShowAlert(false)
-    navigate(`/notions`)
-  });
-};
+// const handleFiberDelete = () => {
+//   deleteFiber(fiber.id).then(() => {    
+//     navigate(`/notions`)
+//   });
+// };
 
-const handleCancel = () => {
-  setShowAlert(false) 
-}
 
-const deleteFiberAlert = () => {
-  return (<>
-  <Alert color="danger" key={'danger'}>
-    Are you sure you want to remove this {fibers.name}?
-    <br></br><Link onClick={handleFiberDelete}>Yes</Link> / <Link onClick={handleCancel}>No</Link>
-  </Alert>
-  </>)
-}
-
+// const handleWeightDelete = () => {
+//   deleteWeight(weights.id).then(() => {
+//     navigate(`/notions`)
+//   });
+// };
 
 
 const theme = createTheme();
@@ -114,9 +108,7 @@ Add fiber and weight tags to projects and yarns to stay organized.
          <section class = "fiberlist" key={fiber.id}>
        <List>
           <ListItem disablePadding>
-              <ListItemText primary={fiber.name} 
-
-              />
+              <ListItemText primary={fiber.name} />
           </ListItem>
         </List>
        
@@ -157,6 +149,7 @@ Add fiber and weight tags to projects and yarns to stay organized.
        <List>
           <ListItem disablePadding>
               <ListItemText primary={weight.name} />
+  
           </ListItem>
         </List>
     

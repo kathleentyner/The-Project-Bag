@@ -31,7 +31,7 @@ export const deleteYarn = (id) => {
 
   export const editYarn = (yarn) => {
    
-    return fetch(`${baseUrl}/${yarn.id}`, {
+    return fetch(`${baseUrl}/${yarn.Id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"

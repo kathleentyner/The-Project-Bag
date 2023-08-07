@@ -26,6 +26,14 @@ useEffect(() => {
 }, [])
 
 
+const handleFiberDelete = () => {
+  deleteFiber(fibers.id).then(() => {    
+    navigate(`/notions`)
+  });
+};
+
+
+
 const create = () => {
   navigate("/weight/new")
 }

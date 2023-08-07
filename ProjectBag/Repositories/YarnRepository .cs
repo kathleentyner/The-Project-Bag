@@ -172,7 +172,7 @@ namespace ProjectBag.Repositories
                            SET Brand = @Brand,
                                Color = @Color,
                                Quantity = @Quantity,
-                               YarnUrl = @YarnUrl
+                               YarnUrl = @YarnUrl,
                                FiberId = @FiberId,
                                WeightId = @WeightId 
                             

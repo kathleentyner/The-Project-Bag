@@ -48,11 +48,12 @@ export const YarnEdit = () => {
             update(yarns)
         })
     }, [yarnId]);
+
     const handleSave = (event) => {
         event.preventDefault()
 
         const yarnToEdit = {
-            Id: parseInt(yarn.Id),
+            Id: parseInt(yarnId),
             Brand: yarn.brand,
             Color: yarn.color,
             Quantity: yarn.quantity,
