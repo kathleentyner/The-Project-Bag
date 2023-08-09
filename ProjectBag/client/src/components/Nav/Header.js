@@ -18,9 +18,10 @@ export const Header = () => {
                   <Tabs value={value} onChange={handleChange} centered>
                     <Tab  label="Home" href="/" />
                     <Tab label="Projects" href="/project" />
-                    <Tab label="Yarn" href="/yarn" />
-                    <Tab label="Resources" href="/resource" />
-                     <Tab label ="Notions" href="/notions" />
+                    <Tab label="Yarn Stash" href="/yarn" />
+                     <Tab label ="Fibers" href="/fiber" />
+                     <Tab label ="Yarn Weight" href="/weight" />
+                     <Tab label = "Resources" href="/resource" />
                     </Tabs>
                 </Box>
 )}

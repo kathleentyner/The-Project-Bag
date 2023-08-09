@@ -7,12 +7,19 @@ import { ProjectForm } from "../Projects/ProjectCreate";
 import { YarnList } from "../Yarn/YarnList";
 import { YarnDetails } from "../Yarn/YarnDetails";
 import { ProjectYarn } from "../ProjectYarn/ProjectYarn";
-import { FiberAndWeight} from "../FiberAndWeight/FiberAndWeight";
+import { FiberList } from "../FiberAndWeight/FiberList";
 import { FiberForm } from "../FiberAndWeight/FiberCreate";
+import { FiberDetails } from "../FiberAndWeight/FiberDetails";
 import { WeightForm } from "../FiberAndWeight/WeightCreate";
+import { WeightDetails } from "../FiberAndWeight/WeightDetails";
+import { WeightList } from "../FiberAndWeight/WeightList";
 import { YarnForm } from "../Yarn/YarnCreate";
 import { YarnEdit } from "../Yarn/YarnEdit"
 import { ProjectEdit } from "../Projects/ProjectEdit"
+import { ResourceEdit } from "../Resource/ResourceEdit";
+import { ResourceForm } from "../Resource/ResourceCreate";
+import { ResourceDetails } from "../Resource/ResourceDetails";
+import { ResourceList } from "../Resource/ResourceList";
 
 export const ApplicationViews =() => {
 
@@ -26,12 +33,20 @@ export const ApplicationViews =() => {
           <Route path="/yarn" element={<YarnList /> } />      
           <Route path="/yarn/:id" element = {<YarnDetails />} />
           <Route path="/manageyarn/:id" element = {<ProjectYarn />} />
-          <Route path ="/notions" element = {<FiberAndWeight /> } />
+          <Route path ="/fiber" element = {<FiberList /> } />
+          <Route path ="/fiber/:id" element = {<FiberDetails /> } />
           <Route path="/fiber/new" element = {<FiberForm />} />
+          <Route path ="/weight" element = {<WeightList /> } />
+          <Route path ="/weight/:id" element = {<WeightDetails /> } />
           <Route path ="/weight/new" element = {<WeightForm/> } />
           <Route path ="/yarn/new" element = {<YarnForm/> } />
           <Route path ="/yarn/edit/:yarnId" element = {<YarnEdit />} />
           <Route path ="/project/edit/:projectId" element = {<ProjectEdit />} />
+          <Route path="/resource" element={<ResourceList /> } />      
+          <Route path="/resource/:id" element = {<ResourceDetails />} />
+          <Route path="/resource/new" element = {<ResourceForm />} />
+          <Route path ="/resource/edit/:resourceId" element = {<ResourceEdit />} />
+
 
     </Routes>
    );

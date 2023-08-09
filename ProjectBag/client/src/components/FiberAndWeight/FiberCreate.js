@@ -27,7 +27,7 @@ export const FiberForm = () => {
             UserId: 1
           
         }
-        return addFiber(fiberToAPI).then(navigate(`/notions`))
+        return addFiber(fiberToAPI).then(navigate(`/fiber`))
     }
 
 const theme = createTheme();

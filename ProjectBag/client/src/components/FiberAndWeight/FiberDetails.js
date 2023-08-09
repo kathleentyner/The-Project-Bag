@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import {deleteYarn, getYarnById } from "../../APIManagers/YarnManager"
+import {deleteFiber, getFiberById } from "../../APIManagers/FIberManager"
 import {Alert } from "reactstrap";
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -17,27 +17,27 @@ import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
 
 
-export const YarnDetails = () => {
-    const [yarn, setYarn] = useState();
+export const FiberDetails = () => {
+    const [fiber, setFiber] = useState();
     const [showAlert, setShowAlert] = useState(false)
     const { id } = useParams();
     const navigate = useNavigate();
    
   
     useEffect(() => {
-      getYarnById(id).then(setYarn)
+      getFiberById(id).then(setFiber)
      
     }, [])
   
-    if (!yarn) {
+    if (!fiber) {
       return null;
     }
     
   
     const handleDelete = () => {
-      deleteYarn(yarn.id).then(() => {
+      deleteFiber(fiber.id).then(() => {
         setShowAlert(false)
-        navigate(`/yarn`)
+        navigate(`/fiber`)
       });
     };
   
@@ -45,10 +45,10 @@ export const YarnDetails = () => {
       setShowAlert(false) 
     }
   
-    const deleteYarnAlert = () => {
+    const deleteFiberAlert = () => {
       return (<>
       <Alert color="danger" key={'danger'}>
-        Are you sure you want to delete this yarn?
+        Are you sure you want to delete this fiber?
         <br></br><Link onClick={handleDelete}>Yes</Link> / <Link onClick={handleCancel}>No</Link>
       </Alert>
       </>)
@@ -66,37 +66,13 @@ export const YarnDetails = () => {
        >
         <Grid item xs={3}>
         <Card sx={{ maxWidth:800} }  display ="flex">
-   <CardActionArea>
-   <CardMedia
-        component="img"
-        height="140"
-        image={yarn.yarnUrl} 
-        alt= "single project"
-      />
+  
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {yarn.brand}
+          {fiber.name}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-        <List sx={{ width: '100%', maxWidth: 700, bgcolor: 'background.paper' }}>
-        <ListItemText primary="Color" secondary= {yarn.color} />
-        <ListItem>
-        <ListItemText primary="Quantity" secondary={yarn.quantity} />
-      </ListItem>
-      <ListItem>
-    <ListItemText primary="Fiber" secondary= {yarn.fiberTag.name} />
-      </ListItem>
-      <ListItem> 
-      <ListItemText primary="Yarn Weight" secondary= {yarn.weightTag.name} />
-      </ListItem>
-    </List>
-        </Typography>
-       
-        <Button variant="contained" 
-        padding={1} 
-        align="center"  onClick={() => navigate(`/yarn/edit/${yarn.id}`)}>Edit</Button>
-     
-     <><Button
+               
+    <Button
         variant="outline"
         align="center"
         padding={1}
@@ -105,10 +81,10 @@ export const YarnDetails = () => {
         }}> 
         Delete
       </Button>
-        {showAlert && deleteYarnAlert()}
-        </>
+        {showAlert && deleteFiberAlert()}
+
       </CardContent>
-    </CardActionArea>
+
 </Card>
 
 

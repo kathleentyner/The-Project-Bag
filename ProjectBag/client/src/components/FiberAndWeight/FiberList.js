@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
 import { useEffect, useState, } from "react"
-import { useNavigate, } from "react-router-dom"
-import { getAllFibers} from "../../APIManagers/FIberManager"
+import { Link, useNavigate, useParams } from "react-router-dom"
+import { getAllFibers} from '../../APIManagers/FIberManager';
 import "./FiberAndWeight.css"
 import CssBaseline from '@mui/material/CssBaseline';
 import Stack from '@mui/material/Stack';
@@ -9,15 +9,20 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import Grid from '@mui/material/Grid'; // Grid version 1
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 
 //list out all the Fibers
-export const FiberList = (fiber) => {
-   const [fibers, setFibers] = useState([])
+export const FiberList = () => {
+   const [fiber, setFibers ] = useState([])
 
-   const navigate = useNavigate()
 
-   const getFibers = () => {
+ 
+ const navigate = useNavigate()
+
+ const getFibers = () => {
     getAllFibers().then(fibers => setFibers(fibers));
 }
 
@@ -25,15 +30,15 @@ useEffect(() => {
   getFibers();
 }, [])
 
-
 const create = () => {
   navigate("/fiber/new")
 }
+
 const theme = createTheme();
              
 return (
   <div>
-    <ThemeProvider theme={theme}>
+  <ThemeProvider theme={theme}>
       <CssBaseline />
       {/* Hero unit */}
       <Box sx={{ bgcolor: '#d7e4fc', pt: 8, pb: 6 }}>
@@ -44,48 +49,49 @@ return (
             align="center"
             color="text.primary"
             gutterBottom
-          >Manage My Fiber and Weight Tags
+          >Manage Fiber Categories
           </Typography>
           <Typography variant="h5" align="center" color="text.secondary" paragraph>
-            Stay Organized
+            Choose the right fiber type for your project
           </Typography>
           <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
-          Selecting the right fiber for a project is just as critical as starting with the right needles to meet gauge. Wool holds heat and stays warm when wet. It makes a good choice for cold weather knits. Wool has excellent stitch definition and springiness. It provides stretch when knitting. Different animal fibers have different properties and "memory" or ability to hold its original shape. Cotton and other plant fibers produce a fabric with a loose drape and are heavier than wool. They are good choices for warm weather knits and an open gauge. 
+          Add fiber types to projects and yarns to stay organized. 
         </Stack>
+        <Box m={1} display="flex" justifyContent="center" alignItems="center">
+            <Button onClick={create}>
+              Add A New Fiber Category
+            </Button>
+          </Box>
         </Container>
         <Box m={1} display="flex" justifyContent="center" alignItems="center">
-          <Button onClick={create}>
-            Add A New Fiber Type
-          </Button>
-        </Box>
+         </Box>
       </Box>
     </ThemeProvider>
 
-    <Box
-      sx={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        '& > :not(style)': {
-          m: 1,
-          width: 300,
-          height: 800,
-          paddingBottom: 20,
-        },
-      }}
-    >  
-      {fibers.map((fiber) => {
+  <Grid xs={6} padding={6}>
+  <Box    
+    >  <p>
+      Selecting the right fiber for a project is just as critical as starting with the right needles to meet gauge. <b>Wool</b> holds heat and stays warm when wet. It makes a good choice for cold weather knits. Wool has excellent stitch definition and springiness. It provides stretch when knitting. Different animal fibers have different properties and "memory" or ability to hold its original shape. 
+    </p>
+    <p> <b>Plant fibers</b> like cotton, hemp, and bamboo produce a fabric with a loose drape and are heavier than wool. They are good choices for warm weather knits and an open gauge. </p>
+     </Box>
+     
+      {fiber.map((fiber) => {
         return (
-          <section className="card" key={fiber.id}>
-            <header>
-              <h3>Fiber Type: {fiber.name}</h3>
-            </header>
-           
-            <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
-      
-            </Stack>
-          </section>
+         <section classname = "fiberlist" key={fiber.id}>
+       <List>
+          <ListItem disablePadding>
+              <Link to={`/fiber/${fiber.id}`}>{fiber.name}</Link>
+              
+          </ListItem>
+        </List>
+       
+      </section>
+   
         )})}
-    </Box>
+
+        </Grid>
+
  </div>
  )
     }

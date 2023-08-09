@@ -2,7 +2,7 @@
 import Button from '@mui/material/Button';
 import { useEffect, useState, } from "react"
 import { useNavigate, Link } from "react-router-dom"
-import { getAllYarn, deleteYarn } from "../../APIManagers/YarnManager"
+import { getAllYarn } from "../../APIManagers/YarnManager"
 import { Yarn } from './Yarn';
 import "./Yarn.css"
 import CssBaseline from '@mui/material/CssBaseline';

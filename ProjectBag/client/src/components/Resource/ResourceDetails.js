@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import {deleteYarn, getYarnById } from "../../APIManagers/YarnManager"
+import {deleteResource, getResourceById } from "../../APIManagers/ResourceManager"
 import {Alert } from "reactstrap";
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -17,27 +17,27 @@ import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
 
 
-export const YarnDetails = () => {
-    const [yarn, setYarn] = useState();
+export const ResourceDetails = () => {
+    const [resource, setResource] = useState();
     const [showAlert, setShowAlert] = useState(false)
     const { id } = useParams();
     const navigate = useNavigate();
    
   
     useEffect(() => {
-      getYarnById(id).then(setYarn)
+      getResourceById(id).then(setResource)
      
     }, [])
   
-    if (!yarn) {
+    if (!resource) {
       return null;
     }
     
   
     const handleDelete = () => {
-      deleteYarn(yarn.id).then(() => {
+      deleteResource(resource.id).then(() => {
         setShowAlert(false)
-        navigate(`/yarn`)
+        navigate(`/resource`)
       });
     };
   
@@ -45,10 +45,10 @@ export const YarnDetails = () => {
       setShowAlert(false) 
     }
   
-    const deleteYarnAlert = () => {
+    const deleteResourceAlert = () => {
       return (<>
       <Alert color="danger" key={'danger'}>
-        Are you sure you want to delete this yarn?
+        Are you sure you want to delete this resource?
         <br></br><Link onClick={handleDelete}>Yes</Link> / <Link onClick={handleCancel}>No</Link>
       </Alert>
       </>)
@@ -56,7 +56,7 @@ export const YarnDetails = () => {
     
     return (
         
-        <Grid
+      <Grid
         container
         spacing={0}
         direction="column"
@@ -67,34 +67,21 @@ export const YarnDetails = () => {
         <Grid item xs={3}>
         <Card sx={{ maxWidth:800} }  display ="flex">
    <CardActionArea>
-   <CardMedia
-        component="img"
-        height="140"
-        image={yarn.yarnUrl} 
-        alt= "single project"
-      />
-      <CardContent>
+
         <Typography gutterBottom variant="h5" component="div">
-          {yarn.brand}
+          {resource.type}
         </Typography>
         <Typography variant="body2" color="text.secondary">
         <List sx={{ width: '100%', maxWidth: 700, bgcolor: 'background.paper' }}>
-        <ListItemText primary="Color" secondary= {yarn.color} />
-        <ListItem>
-        <ListItemText primary="Quantity" secondary={yarn.quantity} />
+        <ListItemText primary="Description" secondary= {resource.description} />
+       <ListItem>
+       <Link to={resource.resourceUrl}>{resource.Title}</Link>
       </ListItem>
-      <ListItem>
-    <ListItemText primary="Fiber" secondary= {yarn.fiberTag.name} />
-      </ListItem>
-      <ListItem> 
-      <ListItemText primary="Yarn Weight" secondary= {yarn.weightTag.name} />
-      </ListItem>
-    </List>
-        </Typography>
-       
+      </List>
+      </Typography>
         <Button variant="contained" 
         padding={1} 
-        align="center"  onClick={() => navigate(`/yarn/edit/${yarn.id}`)}>Edit</Button>
+        align="center"  onClick={() => navigate(`/resource/edit/${resource.id}`)}>Edit</Button>
      
      <><Button
         variant="outline"
@@ -105,9 +92,9 @@ export const YarnDetails = () => {
         }}> 
         Delete
       </Button>
-        {showAlert && deleteYarnAlert()}
+        {showAlert && deleteResourceAlert()}
         </>
-      </CardContent>
+
     </CardActionArea>
 </Card>
 
@@ -116,3 +103,4 @@ export const YarnDetails = () => {
        </Grid>
     )
     }
+    

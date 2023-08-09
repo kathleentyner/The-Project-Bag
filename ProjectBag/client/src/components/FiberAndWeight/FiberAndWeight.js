@@ -1,8 +1,9 @@
 import Button from '@mui/material/Button';
 import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { getAllFibers, deleteFiber } from '../../APIManagers/FIberManager';
 import { getAllWeights, deleteWeight } from '../../APIManagers/WeightManager';
+import { FiberForm } from './FiberCreate';
+import { WeightForm } from './WeightCreate';
 import "./FiberAndWeight.css"
 import CssBaseline from '@mui/material/CssBaseline';
 import Stack from '@mui/material/Stack';
@@ -23,16 +24,20 @@ import {Alert } from "reactstrap";
 
 //list out all the Fibers
 export const FiberAndWeight = () => {
-   const [fibers, setFibers] = useState([])
+  //  const [fibers, setFibers] = useState([])
    const [weights, setWeights] = useState([])
-   const [weight, updateWeight] = useState([])
-  const navigate = useNavigate()
+//      const [fiber, update] = useState({
+//      name: "",
+    
+//   })
+  
+//    const { fiberId } = useParams();
  
-
-
-   const getFibers = () => {
-    getAllFibers().then(fibers => setFibers(fibers));
-}
+//   const navigate = useNavigate()
+ 
+//   const getFibers = () => {
+//     getAllFibers().then(fibers => setFibers(fibers));
+// }
 
 const getWeights = () => {
   getAllWeights().then(weights => setWeights(weights));
@@ -42,13 +47,15 @@ useEffect(() => {
   getWeights()
 }, [])
 
-const newFiber = () => {
-  navigate("/fiber/new")
-}
 
-const newWeight = () => {
-  navigate("/weight/new")
-}
+// useEffect(() => {
+//   getFiberById(fiberId) //route param
+//         .then((fiberArray)=>
+//       {
+//             update(fiberArray) 
+//         })
+// }, [fiberId]) //watch state - param
+
 
 // const handleFiberDelete = () => {
 //   deleteFiber(fiber.id).then(() => {    
@@ -94,31 +101,8 @@ Add fiber and weight tags to projects and yarns to stay organized.
     </ThemeProvider>
 
 
-    <Grid container spacing={2}justifyContent="center">
-  <Grid xs={6} padding={6}>
-  <Box    
-    >  <p>
-      Selecting the right fiber for a project is just as critical as starting with the right needles to meet gauge. <b>Wool</b> holds heat and stays warm when wet. It makes a good choice for cold weather knits. Wool has excellent stitch definition and springiness. It provides stretch when knitting. Different animal fibers have different properties and "memory" or ability to hold its original shape. 
-    </p>
-    <p> <b>Plant fibers</b> like cotton, hemp, and bamboo produce a fabric with a loose drape and are heavier than wool. They are good choices for warm weather knits and an open gauge. </p>
-     </Box>
-     
-      {fibers.map((fiber) => {
-        return (
-         <section class = "fiberlist" key={fiber.id}>
-       <List>
-          <ListItem disablePadding>
-              <ListItemText primary={fiber.name} />
-          </ListItem>
-        </List>
-       
-      </section>
-   
-        )})}
-  <Button onClick={newFiber}>
-              Add A Fiber Type
-            </Button>
-  </Grid>
+  <Grid container spacing={2}justifyContent="center">
+ 
   <Grid xs={6} padding={6}  >
  <p>
      A yarn's weight is importnat to understand in order to meet a pattern's gauge. Here's a handy cheatsheet for estimateing a yarn's gauge. </p>
@@ -157,7 +141,7 @@ Add fiber and weight tags to projects and yarns to stay organized.
    
         )})}
  </Box>
- <Button onClick={newWeight}>
+ <Button onClick={WeightForm}>
               Add A Yarn Weight
             </Button>
   </Grid>

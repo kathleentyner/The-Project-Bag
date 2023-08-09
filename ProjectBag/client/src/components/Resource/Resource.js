@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const Yarn = ({ yarn }) => {
+export const Resource = ({ resource }) => {
 
   return (
       <tbody>
         <tr>
-          <td>{yarn.brand}</td>
+          <td>{resource.type}</td>
          
         </tr>
       </tbody>

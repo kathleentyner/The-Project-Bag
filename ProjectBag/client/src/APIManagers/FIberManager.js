@@ -29,13 +29,13 @@ export const deleteFiber = (id) => {
       .then(() => getAllFibers())
   };
 
-  export const editFiber = (fiber => {
+//   export const editFiber = (fiber => {
    
-    return fetch(`/api/fiber/${fiber.Id}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(fiber)
-    })
-});
+//     return fetch(`/api/fiber/${fiber.Id}`, {
+//         method: "PUT",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify(fiber)
+//     })
+// });
