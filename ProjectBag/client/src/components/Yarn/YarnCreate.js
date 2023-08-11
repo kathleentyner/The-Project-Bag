@@ -1,6 +1,6 @@
-import {useEffect, useState} from "react"
-import {useNavigate } from "react-router-dom"
-import {addYarn} from "../../APIManagers/YarnManager"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { addYarn } from "../../APIManagers/YarnManager"
 import "./Form.css"
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
@@ -11,6 +11,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Button from '@mui/material/Button';
 import { getAllFibers } from "../../APIManagers/FIberManager";
 import { getAllWeights } from "../../APIManagers/WeightManager";
+import narrowlogo from '../Nav/narrowlogo.png'
 
 
 
@@ -18,30 +19,30 @@ export const YarnForm = () => {
     const navigate = useNavigate()
 
     const [weights, setWeights] = useState([])
-     const [fibers, setFibers] = useState([])
+    const [fibers, setFibers] = useState([])
 
     const getFibers = () => {
-         getAllFibers().then(allFibers => setFibers(allFibers));
-   }
-   const getWeights = () => {
-    getAllWeights().then(allWeights => setWeights(allWeights));
-}
+        getAllFibers().then(allFibers => setFibers(allFibers));
+    }
+    const getWeights = () => {
+        getAllWeights().then(allWeights => setWeights(allWeights));
+    }
 
     useEffect(() => {
         getFibers()
         getWeights()
-     }, [])
+    }, [])
 
 
     const [yarn, update] = useState({
         brand: "",
         color: "",
         quantity: "",
-        yarnUrl:"",
+        yarnUrl: "",
         fiberId: 0,
         weightId: 0,
         userId: 0
-     
+
     })
 
     const handleSave = (event) => {
@@ -55,67 +56,89 @@ export const YarnForm = () => {
             FiberId: yarn.fiberId,
             WeightId: yarn.weightId,
             UserId: 1
-          
+
         }
 
         // how to navigate to the project I just created?
         return addYarn(yarnToAPI).then(navigate(`/yarn`))
     }
-  //I've found this method to be very useful when needing to select an item then add it to the database
-  const selectListFiber = (event) => {
-    const copy = {
-        ...yarn
+    //I've found this method to be very useful when needing to select an item then add it to the database
+    const selectListFiber = (event) => {
+        const copy = {
+            ...yarn
+        }
+        copy.fiberId = event.target.value
+        update(copy)
     }
-    copy.fiberId = event.target.value
-    update(copy)
-}
 
-const selectListWeight = (event) => {
-    const copy = {
-        ...yarn
+    const selectListWeight = (event) => {
+        const copy = {
+            ...yarn
+        }
+        copy.weightId = event.target.value
+        update(copy)
     }
-    copy.weightId = event.target.value
-    update(copy)
-}
 
-const theme = createTheme();
+    const theme = createTheme({
+        palette: {
+            light: '#0494AD',
+            main: '#00768B',
+            dark: '#015362',
 
-    return ( <>
+            background: {
+                default: '#F2EEE3',
+            },
+
+            secondary: {
+                main: "#00768B"
+            }
+        }
+    });
+    return (<>
         <ThemeProvider theme={theme}>
-          <CssBaseline />
-    
+            <CssBaseline />
+
             <Box
-          sx={{
-            bgcolor: '#d7e4fc',
-            pt: 8,
-            pb: 6,
-          }}
-        >
-              <Container maxWidth="lg">
-                <Typography
-                  component="h1"
-                  variant="h2"
-                  align="center"
-                  color="text.primary"
-                  gutterBottom
-                >
-                 Yarn Details
+                sx={{
+                    bgcolor: '#F2EEE3',
+                    pt: 8,
+                    pb: 6,
+                }}
+         
+                display='flex'
+                alignItems='center'
+                justify='center'
+>
+                    <Container >
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                justifyContent: "center"
+                            }}
+                        >
+                            <img
+                                alt='Project Bag logo'
+                                src={narrowlogo}
+                                width={800}
+                                align='center'    
+
+                            />
+                        </Box>
+                        </Container>
+
+                   
+                    <Stack
+                        sx={{ pt: 4 }}
+                        direction="row"
+                        spacing={2}
+                        align='center'    
+                        > <Typography variant="h5" align="center" color="#545454" paragraph>
+                    Add to your stash!
                 </Typography>
-                <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                Add to your stash!
-                </Typography>
-                <Stack
-                  sx={{ pt: 4 }}
-                  direction="row"
-                  spacing={2}
-                  justifyContent="center"
-                >
-                </Stack>
-              </Container>
-            </Box>         
-              </ThemeProvider>    
-              <form className="projectform">
-              <fieldset>
+                    </Stack>
+            </Box>
+            <form className="projectform">
+                <fieldset>
                     <div className="form-group">
                         <label htmlFor="description"><strong>Brand: </strong> </label>
                         <input
@@ -123,17 +146,17 @@ const theme = createTheme();
                             type="text"
                             className="form-control"
                             value={yarn.brand}
-                            onChange={ 
+                            onChange={
                                 (event) => {
-                                const copy = {...yarn} 
-                                copy.brand = event.target.value 
-                                update(copy)
-                            } 
-                        }/>
-                     </div>
-                     </fieldset>
-                     
-                 <fieldset>
+                                    const copy = { ...yarn }
+                                    copy.brand = event.target.value
+                                    update(copy)
+                                }
+                            } />
+                    </div>
+                </fieldset>
+
+                <fieldset>
                     <div className="form-group">
                         <label htmlFor="description"><strong>Colorway: </strong> </label>
                         <input
@@ -141,17 +164,17 @@ const theme = createTheme();
                             type="text"
                             className="form-control"
                             value={yarn.color}
-                            onChange={ 
+                            onChange={
                                 (event) => {
-                                const copy = {...yarn} 
-                                copy.color = event.target.value 
-                                update(copy)
-                            } 
-                        }/>
-                     </div>
-                     </fieldset>
+                                    const copy = { ...yarn }
+                                    copy.color = event.target.value
+                                    update(copy)
+                                }
+                            } />
+                    </div>
+                </fieldset>
 
-                     <fieldset>
+                <fieldset>
                     <div className="form-group">
                         <label htmlFor="description"><strong>Add a Photo Url: </strong> </label>
                         <input
@@ -159,36 +182,36 @@ const theme = createTheme();
                             type="text"
                             className="form-control"
                             value={yarn.yarnUrl}
-                            onChange={ 
+                            onChange={
                                 (event) => {
-                                const copy = {...yarn} 
-                                copy.yarnUrl = event.target.value 
-                                update(copy)
-                            } 
-                        }/>
-                     </div>
-                     </fieldset>
-                     <fieldset>
+                                    const copy = { ...yarn }
+                                    copy.yarnUrl = event.target.value
+                                    update(copy)
+                                }
+                            } />
+                    </div>
+                </fieldset>
+                <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description"><strong>Quntity: </strong> </label>
+                        <label htmlFor="description"><strong>Quantity: </strong> </label>
                         <input
                             required autoFocus
                             type="text"
                             className="form-control"
                             value={yarn.quantity}
-                            onChange={ 
+                            onChange={
                                 (event) => {
-                                const copy = {...yarn} 
-                                copy.quantity = event.target.value 
-                                update(copy)
-                            } 
-                        }/>
-                     </div>
-                     </fieldset>
+                                    const copy = { ...yarn }
+                                    copy.quantity = event.target.value
+                                    update(copy)
+                                }
+                            } />
+                    </div>
+                </fieldset>
 
-                    <fieldset>
+                <fieldset>
                     <div className="form-group">
-                        <label htmlFor="fiber-select">Yarn Fiber Type</label>
+                        <label htmlFor="fiber-select">Yarn Fiber Type </label>
                         {/* Select that category from the list!! */}
                         <select id="type"
                             value={
@@ -196,25 +219,25 @@ const theme = createTheme();
                             }
                             onChange={
                                 event => selectListFiber(event)
-                        }>
-                            <option value="0">Select the Fiber Type</option>
+                            }>
+                            <option value="0">Select the Fiber Type </option>
                             {
-                            fibers.map(fiber => {
-                                return <option value={fiber.id} key={
-                                    fiber.id
-                                }>
-                                    {
-                                    fiber.name
-                                }</option>
-                        })
-                        } </select>  
-                        </div>
-                    </fieldset>
+                                fibers.map(fiber => {
+                                    return <option value={fiber.id} key={
+                                        fiber.id
+                                    }>
+                                        {
+                                            fiber.name
+                                        }</option>
+                                })
+                            } </select>
+                    </div>
+                </fieldset>
 
-                    
-                    <fieldset>
+
+                <fieldset>
                     <div className="form-group">
-                        <label htmlFor="weight-select">Yarn Weight</label>
+                        <label htmlFor="weight-select">Yarn Weight </label>
                         {/* Select that category from the list!! */}
                         <select id="type"
                             value={
@@ -222,26 +245,27 @@ const theme = createTheme();
                             }
                             onChange={
                                 event => selectListWeight(event)
-                        }>
-                            <option value="0">Select the Yarn Weight</option>
+                            }>
+                            <option value="0">Select the Yarn Weight </option>
                             {
-                            weights.map(weight => {
-                                return <option value={weight.id} key={
-                                    weight.id
-                                }>
-                                    {
-                                    weight.name
-                                }</option>
-                        })
-                        } </select>  
-                         </div>
-                        </fieldset>
+                                weights.map(weight => {
+                                    return <option value={weight.id} key={
+                                        weight.id
+                                    }>
+                                        {
+                                            weight.name
+                                        }</option>
+                                })
+                            } </select>
+                    </div>
+                </fieldset>
 
-                  
-                 <Button variant="outlined"  onClick={(clickEvent) => handleSave(clickEvent)} >
-                  Submit
-                 </Button>
-                   
-            </form>   
+
+                <Button variant="contained" color='secondary' onClick={(clickEvent) => handleSave(clickEvent)} >
+                    Submit
+                </Button>
+
+            </form>        </ThemeProvider>
     </>
-        )}
+    )
+}

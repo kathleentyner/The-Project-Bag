@@ -39,30 +39,44 @@ export const ResourceForm = () => {
         return addResource(resourceToAPI).then(navigate(`/resource`))
     }
   
-const theme = createTheme();
-
-    return ( <>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
+    const theme = createTheme({
+        palette: {
+            light: '#0494AD',
+            main: '#00768B',
+            dark: '#015362',
+         
+            background: {
+            default: '#F2EEE3',
+            },
+      
+            secondary:{
+              main: "#00768B"
+            }
+      }});
     
-            <Box
-          sx={{
-            bgcolor: '#d7e4fc',
-            pt: 8,
-            pb: 6,
-          }}
-        >
-              <Container maxWidth="lg">
-                <Typography
-                  component="h1"
-                  variant="h2"
-                  align="center"
-                  color="text.primary"
-                  gutterBottom
-                >
+        return ( <>
+    <ThemeProvider theme={theme}>
+              <CssBaseline />
+        
+                <Box
+              sx={{        
+                bgcolor: '#F2EEE3',
+                pt: 8,
+                pb: 6,
+              }}
+            >
+                  <Container maxWidth="lg">
+                    <Typography
+                      component="h1"
+                      variant="h2"
+                      align="center"
+                      color="#545454"
+    
+                      gutterBottom
+                    >
                 Get Inspired
                 </Typography>
-                <Typography variant="h5" align="center" color="text.secondary" paragraph>
+                <Typography variant="h5" align="center" color="#545454"  paragraph>
                 Add a resource to your library
                 </Typography>
                 <Stack
@@ -74,7 +88,6 @@ const theme = createTheme();
                 </Stack>
               </Container>
             </Box>         
-              </ThemeProvider>    
               <form className="projectform">
               <fieldset>
                     <div className="form-group">
@@ -147,10 +160,11 @@ const theme = createTheme();
                      </fieldset>
                     
                   
-                 <Button variant="outlined"  onClick={(clickEvent) => handleSave(clickEvent)} >
+                 <Button variant="contained" color='secondary'  onClick={(clickEvent) => handleSave(clickEvent)} >
                   Submit
                  </Button>
                    
-            </form>   
+            </form>                 </ThemeProvider>    
+
     </>
         )}

@@ -1,6 +1,5 @@
 import {useState} from "react"
 import {useNavigate} from "react-router-dom"
-import "./FiberAndWeight.css"
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -9,7 +8,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Button from '@mui/material/Button';
 import { addFiber } from "../../APIManagers/FIberManager";
-
+import narrowlogo from '../Nav/narrowlogo.png';
 
 
 export const FiberForm = () => {
@@ -27,36 +26,56 @@ export const FiberForm = () => {
             UserId: 1
           
         }
-        return addFiber(fiberToAPI).then(navigate(`/fiber`))
+        return addFiber(fiberToAPI).then(navigate(`/notions`))
     }
 
-const theme = createTheme();
-
-    return ( <>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
+    const theme = createTheme({
+      palette: {
+          light: '#0494AD',
+          main: '#00768B',
+          dark: '#015362',
+       
+          background: {
+          default: '#F2EEE3',
+          },
     
-            <Box
-          sx={{
-            bgcolor: '#d7e4fc',
-            pt: 8,
-            pb: 6,
-          }}
-        >
-              <Container maxWidth="lg">
-                <Typography
-                  component="h1"
-                  variant="h2"
-                  align="center"
-                  color="text.primary"
-                  gutterBottom
-                >
-                 New Fiber Type
-                </Typography>
-                
-              </Container>
-            </Box>         
-              </ThemeProvider>    
+          secondary:{
+            main: "#00768B"
+          }
+    }});
+    
+    return ( <>
+     <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box
+        sx={{
+          bgcolor: '#F2EEE3',
+          pt: 8,
+          pb: 6,
+        }}
+        display='flex'
+        alignItems='center'
+        justify='center'
+
+      >
+        <Container>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: "center"
+            }}
+          >
+            <img
+              alt='Project Bag logo'
+              src={narrowlogo}
+              width={800}
+              align="center"
+            />
+          </Box>
+          <Typography variant="h5" align="center" color="text.secondary" paragraph>
+Add A New Fiber Category          </Typography>      
+</Container>
+            </Box>
               <form className="projectform">
               <fieldset>
                     <div className="form-group">
@@ -75,12 +94,14 @@ const theme = createTheme();
                         }/>
                      </div>
                      </fieldset>
-                     
+                   
                 
-                 <Button variant="outlined"  onClick={(clickEvent) => handleSave(clickEvent)} >
+                 <Button color="primary" variant="contained" onClick={(clickEvent) => handleSave(clickEvent)} >
                   Submit
                  </Button>
-                   
-            </form>   
+                 </form>
+
+                 </ThemeProvider>  
+              
     </>
         )}

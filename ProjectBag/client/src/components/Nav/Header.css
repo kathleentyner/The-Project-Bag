@@ -4,13 +4,13 @@ ul {
     padding-left: 2em;
     color: #F6F6F6;
     overflow: hidden;
-    background-color: rgb(151, 174, 214);
+    background-color:#545454;
   }
   
   li {
     float: left;
   
-    background-color: rgb(151, 174, 214);
+    background-color: #545454;
   }
   
   .navbar_item {
@@ -19,7 +19,7 @@ ul {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    background-color: rgb(151, 174, 214);
+    background-color:#545454;
   }
 
   .navbar_link {
@@ -29,7 +29,7 @@ ul {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;    
-    background-color: rgb(151, 174, 214);
+    background-color:#545454;
   }
   
   /* Change the link color to #111 (black) on hover */
@@ -40,8 +40,8 @@ ul {
 
   .navbar__logout {
 
-    display: block;    
-    background-color: rgb(151, 174, 214);
+    display: block;   
+    background-color: #545454;
     color: rgb(17, 38, 75);
     font-size: 22px;
     padding: 14px 16px;

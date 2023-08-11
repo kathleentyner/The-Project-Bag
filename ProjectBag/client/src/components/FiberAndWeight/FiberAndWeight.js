@@ -1,152 +1,177 @@
-import Button from '@mui/material/Button';
-import { useEffect, useState } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom"
-import { getAllWeights, deleteWeight } from '../../APIManagers/WeightManager';
-import { FiberForm } from './FiberCreate';
-import { WeightForm } from './WeightCreate';
-import "./FiberAndWeight.css"
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { getAllWeights, deleteWeight, addWeight } from '../../APIManagers/WeightManager';
+import { getAllFibers } from '../../APIManagers/FIberManager';
+
 import CssBaseline from '@mui/material/CssBaseline';
-import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Grid from '@mui/material/Grid'; // Grid version 1
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Divider from '@mui/material/Divider';
-import {Alert } from "reactstrap";
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import narrowlogo from '../Nav/narrowlogo.png';
+import weight from './weight.jpg'
 
-
-
-//list out all the Fibers
 export const FiberAndWeight = () => {
-  //  const [fibers, setFibers] = useState([])
-   const [weights, setWeights] = useState([])
-//      const [fiber, update] = useState({
-//      name: "",
-    
-//   })
+  const [fibers, setFibers] = useState([]);
+  const [weights, setWeights] = useState([]);
+  const navigate = useNavigate()
+
+  const getFibers = () => {
+    getAllFibers().then(fibers => setFibers(fibers));
+  };
+
+  const getWeights = () => {
+    getAllWeights().then(weights => setWeights(weights));
+  };
+
+  useEffect(() => {
+    getFibers();
+    getWeights();
+  }, []);
+
+  const create = () => {
+    navigate("/weight/new")
+  }
+
+  const createFiber = () => {
+    navigate("/fiber/new")
+  }
   
-//    const { fiberId } = useParams();
- 
-//   const navigate = useNavigate()
- 
-//   const getFibers = () => {
-//     getAllFibers().then(fibers => setFibers(fibers));
-// }
-
-const getWeights = () => {
-  getAllWeights().then(weights => setWeights(weights));
-}
-useEffect(() => {
-  getFibers();
-  getWeights()
-}, [])
-
-
-// useEffect(() => {
-//   getFiberById(fiberId) //route param
-//         .then((fiberArray)=>
-//       {
-//             update(fiberArray) 
-//         })
-// }, [fiberId]) //watch state - param
-
-
-// const handleFiberDelete = () => {
-//   deleteFiber(fiber.id).then(() => {    
-//     navigate(`/notions`)
-//   });
-// };
-
-
-// const handleWeightDelete = () => {
-//   deleteWeight(weights.id).then(() => {
-//     navigate(`/notions`)
-//   });
-// };
-
-
-const theme = createTheme();
-             
-return (
-  <div>
+  const theme = createTheme({
+    palette: {
+        light: '#0494AD',
+        main: '#00768B',
+        dark: '#015362',
+     
+        background: {
+        default: '#F2EEE3',
+        },
+  
+        secondary:{
+          main: "#00768B"
+        }
+  }});
+  
+  return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {/* Hero unit */}
-      <Box sx={{ bgcolor: '#d7e4fc', pt: 8, pb: 6 }}>
-        <Container maxWidth="lg">
-          <Typography
-            component="h1"
-            variant="h2"
-            align="center"
-            color="text.primary"
-            gutterBottom
-          >Manage Fiber and Weight Categories
-          </Typography>
+      <Box
+        sx={{
+          bgcolor: '#F2EEE3',
+          pt: 8,
+          pb: 6,
+        }}
+        display='flex'
+        alignItems='center'
+        justify='center'
+
+      >
+        <Container>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: "center"
+            }}
+          >
+            <img
+              alt='Project Bag logo'
+              src={narrowlogo}
+              width={800}
+              align="center"
+            />
+          </Box>
           <Typography variant="h5" align="center" color="text.secondary" paragraph>
-            Stay Organized
+            Add fiber and weight tags to your projects and yarns to stay organized
           </Typography>
-          <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
-Add fiber and weight tags to projects and yarns to stay organized. 
-</Stack>
         </Container>
-        <Box m={1} display="flex" justifyContent="center" alignItems="center">
-         </Box>
       </Box>
-    </ThemeProvider>
+      <Grid container spacing={6}>
+        <Grid item xs={6}>
+          <Box>               
+             <Typography variant="body1" bgcolor='#F2EEE3' padding={5}
+color="#545454" paragraph>
+
+            <p>
+              Selecting the right fiber for a project is just as critical as starting with the right needles to meet gauge. <b>Animal Fibers</b>, like sheeps wool, holds heat and stays warm when wet. It makes a good choice for cold weather knits. Wool has excellent stitch definition and springiness. It provides stretch when knitting. Different animal fibers have different properties and "memory" or ability to hold its original shape.
+            </p>
+            <p><b>Plant fibers</b> like cotton, hemp, and bamboo produce a fabric with a loose drape and are heavier than wool. They are good choices for warm weather knits and an open gauge.</p>
+        </Typography>
 
 
-  <Grid container spacing={2}justifyContent="center">
- 
-  <Grid xs={6} padding={6}  >
- <p>
-     A yarn's weight is importnat to understand in order to meet a pattern's gauge. Here's a handy cheatsheet for estimateing a yarn's gauge. </p>
+        <Typography paddingLeft={6} paddingBottom={3} variant="h4" align="left" color="#545454" fontFamily={'sans-serif'} >
+              Fiber Types
+              </Typography>
+         </Box>
+         {fibers.map((fiber) => {
+          return (
+            <section className="list" key={fiber.id}>
+            <header>
+            <Typography paddingLeft={6} paddingBottom={3} align="left" color="#545454" fontFamily={'sans-serif'} >
 
-          <h3>Gauge Cheatsheet</h3>
-
-          <p><b> Needle size 1-4 </b></p>
-         <p>Lace: 8 or more stitches  = 1"; 
-          Fingering: 7-8 stiches = 1" </p>
-
-         <p><b> Needle Size 4-7 </b></p>
-         <p> Sport: 6-6.75 stitches = 1"
-          DK: 5.25-6 stitches = 1" </p>
-
-         <p><b> Needle Size 7-9 </b></p>
-          <p>Worsted: 4-5 stitches = 1"
-          Aran: 4 stitches = 1" </p>
-
-          <p><b> Needle Size 9-11 </b></p>
-         <p>Bulky: 3-3.75 stitches = 1"</p>
-
-         <p><b> Needle Size 11+ </b></p>
-        <p>Super Bulky: less than 2.75 sts = 1"</p>    
-      <Box> 
-      {weights.map((weight) => {
-        return (
-         <section class = "fiberlist" key={weight.id}>
-       <List>
-          <ListItem disablePadding>
-              <ListItemText primary={weight.name} />
-  
-          </ListItem>
-        </List>
-    
-      </section>
-   
-        )})}
- </Box>
- <Button onClick={WeightForm}>
-              Add A Yarn Weight
+                {fiber.name}
+                </Typography>
+                </header>
+                </section>)
+  })
+} <Button onClick={createFiber} variant="contained" paddingLeft={8} padding={6} align="center" color='secondary'>
+              Add A New Fiber Category
             </Button>
-  </Grid>
-</Grid>
-    
- </div>
- )
-    }
+
+        </Grid>
+
+        <Grid item xs={6}>
+          <Box>    <Typography variant="body1" bgcolor='#F2EEE3' padding={5}
+          color="#545454" paragraph>
+            <p>A yarn's weight is important to understand in order to meet a pattern's gauge. Read on to learn more about choosing the right yarn for your project.</p>
+            </Typography> 
+          
+<Typography paddingLeft={6} paddingBottom={3} variant="h4" align="left" color="#545454" fontFamily={'sans-serif'} >
+
+
+My Yarn Weights
+  
+  </Typography> 
+  
+ 
+  </Box>
+  <Grid item xs={6}>
+
+  {weights.map((weight) => {
+          return (
+            <section className="list" key={weight.id}>
+            <header>
+              <Typography paddingLeft={6} paddingBottom={3} align="left" color="#545454" fontFamily={'sans-serif'} >
+              
+                {weight.name}
+                </Typography>
+                </header>
+                </section>)
+  })
+}  <Button onClick={create} variant="contained" paddingLeft={8} padding={6} align="center" color='secondary' >
+              Add A New Weight
+            </Button>
+            </Grid>
+<Grid>
+  <Box
+            sx={{
+              display: 'flex',
+              justifyContent: "center"
+            }}
+          >
+            <img
+              alt='yarn weight chart'
+              src={weight}
+              width={300}
+              align='center'
+              paddingBottom={6}
+            />
+            </Box>
+         
+      </Grid>
+      </Grid>
+      </Grid>
+    </ThemeProvider>
+  );
+};

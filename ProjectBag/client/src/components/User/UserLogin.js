@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useNavigate, Link } from "react-router-dom";
+import "./Login.css"
 import { login } from "../../APIManagers/UserManager";
 
 export const Login = ({setIsLoggedIn})=> {

@@ -2,7 +2,6 @@ import Button from '@mui/material/Button';
 import { useEffect, useState, } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { getAllFibers} from '../../APIManagers/FIberManager';
-import "./FiberAndWeight.css"
 import CssBaseline from '@mui/material/CssBaseline';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
@@ -34,31 +33,44 @@ const create = () => {
   navigate("/fiber/new")
 }
 
-const theme = createTheme();
+const theme = createTheme({
+
+  palette: {
+    primary: {
+      light: '#0494AD',
+      main: '#00768B',
+      dark: '#015362',
+     
+    },
+  },
+});
+
              
 return (
   <div>
   <ThemeProvider theme={theme}>
       <CssBaseline />
       {/* Hero unit */}
-      <Box sx={{ bgcolor: '#d7e4fc', pt: 8, pb: 6 }}>
+      <Box sx={{   bgcolor: '#F2EEE3',
+            pt: 8,
+            pb: 6,
+            color: "#545454"}}>
         <Container maxWidth="lg">
           <Typography
-            component="h1"
-            variant="h2"
-            align="center"
-            color="text.primary"
-            gutterBottom
+                  component="h1"
+                  variant="h2"
+                  align="center"
+                  color="#545454"
+                  gutterBottom
           >Manage Fiber Categories
           </Typography>
           <Typography variant="h5" align="center" color="text.secondary" paragraph>
-            Choose the right fiber type for your project
+            Choose the right fiber for your project
           </Typography>
           <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
-          Add fiber types to projects and yarns to stay organized. 
-        </Stack>
+          You can assign fibers to your projects and yarn when creating or editing a yarn/project.        </Stack>
         <Box m={1} display="flex" justifyContent="center" alignItems="center">
-            <Button onClick={create}>
+            <Button onClick={create} color="primary" variant="contained">
               Add A New Fiber Category
             </Button>
           </Box>
@@ -66,7 +78,6 @@ return (
         <Box m={1} display="flex" justifyContent="center" alignItems="center">
          </Box>
       </Box>
-    </ThemeProvider>
 
   <Grid xs={6} padding={6}>
   <Box    
@@ -91,6 +102,7 @@ return (
         )})}
 
         </Grid>
+        </ThemeProvider>
 
  </div>
  )

@@ -40,42 +40,91 @@ export const ResourceList = () => {
     resourcesByType[res.type].push(res);
   });
 
-  const theme = createTheme();
-
-  return (
-    <div>
-      {/* ... (ThemeProvider, CssBaseline, Box, Typography, and Button components) */}
+  const theme = createTheme({
+    palette: {
+        light: '#0494AD',
+        main: '#00768B',
+        dark: '#015362',
+     
+        background: {
+        default: '#F2EEE3',
+        },
   
+        secondary:{
+          main: "#00768B"
+        }
+  }});
+             
+     return (<>
+  
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          {/* Hero unit */}
+          <Box sx={{   bgcolor: '#F2EEE3', pt: 8, pb: 6 }}>
+            <Container maxWidth="lg">
+              <Typography
+                component="h1"
+                variant="h2"
+                align="center"
+                color="#545454"
+                gutterBottom
+              >
+                Resource Library
+              </Typography>
+              <Typography variant="h5" align="center" color="#545454" paragraph>
+                Get Inspired
+              </Typography>
+              <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
+                {/* Your content here */}
+              </Stack>
+            </Container>
+            <Box m={1} display="flex" justifyContent="center" alignItems="center">
+              <Button   color='secondary' onClick={create}>
+                Add a Resource
+              </Button>
+            </Box>
+          </Box>
+        
+       
       <Box
         sx={{
+          position: 'center',
           display: 'flex',
           flexWrap: 'wrap',
           '& > :not(style)': {
             m: 1,
-            width: 300,
-            height: 800,
+            width: 800,
+            height: 300,
             paddingBottom: 20,
+            
           },
         }}
       >  
         {Object.keys(resourcesByType).map((type) => (
-          <section key={type}>
-            <Typography variant="h5" color="text.primary" gutterBottom>
-              {type} Resources
+          <section key={type} >
+            <Typography variant="h5"  align="center" color="#545454" gutterBottom>
+              {type}
             </Typography>
             {resourcesByType[type].map((res) => (
               <div className="card" key={res.id}>
-                <header>
-                  <h3><Link to={res.resourceUrl}>{res.title}</Link></h3>
-                  <p>Desctiption: {res.description}</p>
-                  <Link to={`/resource/${res.id}`}>Manage Resource</Link>
-                </header>
-                {/* ... (Stack component) */}
+             
+                <Typography  align="center" color="#545454" gutterBottom>
+
+                  <Link to={res.resourceUrl}>{res.title}</Link>
+                  Desctiption: {res.description}
+                  </Typography>
+                  <Button variant="contained" 
+        padding={1} color='secondary'
+        align="center" onClick={() => navigate(`/resource/edit/${resource.id}`)}>Manage</Button>
+                
+                <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center" >
+      
+      </Stack>
               </div>
             ))}
           </section>
         ))}
       </Box>
-    </div>
+    </ThemeProvider> </>
   );
 }

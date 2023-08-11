@@ -2,6 +2,7 @@ import React, { useState} from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useNavigate } from "react-router-dom";
 import { register } from "../../APIManagers/UserManager";
+import "./Login.css"
 
 
 export const Register = ({setIsLoggedIn}) =>{

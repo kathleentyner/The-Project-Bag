@@ -20,7 +20,7 @@ import { ResourceEdit } from "../Resource/ResourceEdit";
 import { ResourceForm } from "../Resource/ResourceCreate";
 import { ResourceDetails } from "../Resource/ResourceDetails";
 import { ResourceList } from "../Resource/ResourceList";
-
+import { FiberAndWeight } from "../FiberAndWeight/FiberAndWeight";
 export const ApplicationViews =() => {
 
     return(
@@ -46,7 +46,8 @@ export const ApplicationViews =() => {
           <Route path="/resource/:id" element = {<ResourceDetails />} />
           <Route path="/resource/new" element = {<ResourceForm />} />
           <Route path ="/resource/edit/:resourceId" element = {<ResourceEdit />} />
-
+          <Route path="/notions" element={<FiberAndWeight /> } />      
+          
 
     </Routes>
    );

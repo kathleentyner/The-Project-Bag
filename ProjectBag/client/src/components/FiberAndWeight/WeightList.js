@@ -2,7 +2,6 @@ import Button from '@mui/material/Button';
 import { useEffect, useState, } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { getAllWeights} from '../../APIManagers/WeightManager';
-import "./FiberAndWeight.css"
 import CssBaseline from '@mui/material/CssBaseline';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
@@ -34,21 +33,33 @@ const create = () => {
   navigate("/weight/new")
 }
 
-const theme = createTheme();
-             
+const theme = createTheme({
+
+  palette: {
+    primary: {
+      light: '#0494AD',
+      main: '#00768B',
+      dark: '#015362',
+      main: '#0494AD'
+    },
+  },
+});             
 return (
   <div>
   <ThemeProvider theme={theme}>
       <CssBaseline />
       {/* Hero unit */}
-      <Box sx={{ bgcolor: '#d7e4fc', pt: 8, pb: 6 }}>
+      <Box sx={{   bgcolor: '#F2EEE3',
+            pt: 8,
+            pb: 6,
+            color: "#545454"}}>
         <Container maxWidth="lg">
           <Typography
-            component="h1"
-            variant="h2"
-            align="center"
-            color="text.primary"
-            gutterBottom
+                  component="h1"
+                  variant="h2"
+                  align="center"
+                  color="#545454"
+                  gutterBottom
           >Manage Weight Categories
           </Typography>
           <Typography variant="h5" align="center" color="text.secondary" paragraph>
@@ -58,7 +69,7 @@ return (
           Add yarn weight categories to projects and yarns to stay organized. 
         </Stack>
         <Box m={1} display="flex" justifyContent="center" alignItems="center">
-            <Button onClick={create}>
+            <Button onClick={create} color="primary" variant="contained" >
               Add A New Yarn Weight Category
             </Button>
           </Box>
@@ -66,7 +77,6 @@ return (
         <Box m={1} display="flex" justifyContent="center" alignItems="center">
          </Box>
       </Box>
-    </ThemeProvider>
 
   <Grid xs={6} padding={6}>
 
@@ -109,6 +119,8 @@ return (
 
 )})}
 </Grid>
+</ThemeProvider>
+
  </div>
  )
     }

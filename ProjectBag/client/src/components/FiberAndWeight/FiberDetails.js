@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
+import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { CardActionArea} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -48,20 +48,56 @@ export const FiberDetails = () => {
     const deleteFiberAlert = () => {
       return (<>
       <Alert color="danger" key={'danger'}>
-        Are you sure you want to delete this fiber?
+        Are you sure you want to delete {fiber.name} from your fiber catagories?
         <br></br><Link onClick={handleDelete}>Yes</Link> / <Link onClick={handleCancel}>No</Link>
       </Alert>
       </>)
     }
+    const theme = createTheme({
+
+      palette: {
+        primary: {
+          light: '#0494AD',
+          main: '#00768B',
+          dark: '#015362',
+         
+        },
+      },
+    });
     
     return (
+      <ThemeProvider theme={theme}>
+      <CssBaseline />
+
+        <Box
+      sx={{
+        bgcolor: '#F2EEE3',
+        pt: 8,
+        pb: 6,
+        color: "#545454"
+      }}
+    >
+          <Container maxWidth="lg">
+            <Typography
+              component="h1"
+              variant="h2"
+              align="center"
+              color="#545454"
+              gutterBottom
+            >
+            Manage Fiber Catagories
+            </Typography>
+            
+          </Container>
+        </Box>         
         
         <Grid
         container
-        spacing={0}
+        spacing={6}
         direction="column"
         alignItems="center"
         justify="center"
+        marginTop={8}
         style={{ minHeight: '100vh' }}
        >
         <Grid item xs={3}>
@@ -73,8 +109,9 @@ export const FiberDetails = () => {
         </Typography>
                
     <Button
-        variant="outline"
+        variant="contained"
         align="center"
+        color="primary"
         padding={1}
         onClick={() => {
           setShowAlert(true);      
@@ -90,5 +127,6 @@ export const FiberDetails = () => {
 
         </Grid>      
        </Grid>
+       </ThemeProvider>
     )
     }

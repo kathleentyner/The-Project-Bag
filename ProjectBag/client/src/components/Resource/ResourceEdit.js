@@ -70,7 +70,7 @@ const theme = createTheme();
                  Resource Details
                 </Typography>
                 <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                Update Your {resource.description} {resource.type} 
+                Update Your {resource.name} {resource.type} 
                 </Typography>
                 <Stack
                   sx={{ pt: 4 }}

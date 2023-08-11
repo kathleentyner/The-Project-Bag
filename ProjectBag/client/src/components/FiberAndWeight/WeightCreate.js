@@ -1,7 +1,5 @@
 import {useState} from "react"
 import {useNavigate} from "react-router-dom"
-import "./FiberAndWeight.css"
-
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -30,7 +28,18 @@ export const WeightForm = () => {
         return addWeight(weightToAPI).then(navigate(`/notions`))
     }
 
-const theme = createTheme();
+    const theme = createTheme({
+
+      palette: {
+        primary: {
+          light: '#0494AD',
+          main: '#00768B',
+          dark: '#015362',
+         
+        },  },
+    });
+    
+
 
     return ( <>
         <ThemeProvider theme={theme}>
@@ -38,9 +47,10 @@ const theme = createTheme();
     
             <Box
           sx={{
-            bgcolor: '#d7e4fc',
+            bgcolor: '#F2EEE3',
             pt: 8,
             pb: 6,
+            color: "#545454"
           }}
         >
               <Container maxWidth="lg">
@@ -48,7 +58,7 @@ const theme = createTheme();
                   component="h1"
                   variant="h2"
                   align="center"
-                  color="text.primary"
+                  color="#545454"
                   gutterBottom
                 >
                  New Yarn Weight
@@ -56,7 +66,7 @@ const theme = createTheme();
                 
               </Container>
             </Box>         
-              </ThemeProvider>    
+        
               <form className="projectform">
               <fieldset>
                     <div className="form-group">
@@ -77,10 +87,11 @@ const theme = createTheme();
                      </fieldset>
                      
                 
-                 <Button variant="outlined"  onClick={(clickEvent) => handleSave(clickEvent)} >
+                 <Button variant="contained" color="primary" onClick={(clickEvent) => handleSave(clickEvent)} >
                   Submit
                  </Button>
                    
             </form>   
+            </ThemeProvider>    
     </>
         )}

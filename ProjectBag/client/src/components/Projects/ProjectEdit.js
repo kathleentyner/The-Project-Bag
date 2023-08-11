@@ -11,6 +11,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Button from '@mui/material/Button';
 import { getAllFibers } from "../../APIManagers/FIberManager";
 import { getAllWeights } from "../../APIManagers/WeightManager";
+import narrowlogo from '../Nav/narrowlogo.png'
 
 
 
@@ -89,30 +90,53 @@ const selectListWeight = (event) => {
     updateProject(copy)
 }
 
-const theme = createTheme();
 
+const theme = createTheme({
+    palette: {
+        light: '#0494AD',
+        main: '#00768B',
+        dark: '#015362',
+     
+        background: {
+        default: '#F2EEE3',
+        },
+  
+        secondary:{
+          main: "#00768B"
+        }
+  }});
     return ( <>
         <ThemeProvider theme={theme}>
           <CssBaseline />
     
-            <Box
-          sx={{
-            bgcolor: '#d7e4fc',
-            pt: 8,
-            pb: 6,
-          }}
-        >
-              <Container maxWidth="lg">
-                <Typography
-                  component="h1"
-                  variant="h2"
-                  align="center"
-                  color="text.primary"
-                  gutterBottom
-                >
-                 Project Details
-                </Typography>
-                <Typography variant="h5" align="center" color="text.secondary" paragraph>
+          <Box
+                sx={{
+                    bgcolor: '#F2EEE3',
+                    pt: 8,
+                    pb: 6,
+                }}
+
+                display='flex'
+                alignItems='center'
+                justify='center'>
+                <Container >
+                    <Container m>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                justifyContent: "center"
+                            }}
+                        >
+                            <img
+                                alt='Project Bag logo'
+                                src={narrowlogo}
+                                width={800}
+                                align="center"
+
+                            />
+                        </Box>
+                    </Container>
+                <Typography variant="h5" align="center" color="#545454" paragraph>
                 Update your {editedProject.patternName}
                 </Typography>
                 <Stack
@@ -124,7 +148,6 @@ const theme = createTheme();
                 </Stack>
               </Container>
             </Box>         
-              </ThemeProvider>    
               <form className="projectform">
               <fieldset>
                     <div className="form-group">
@@ -267,10 +290,11 @@ const theme = createTheme();
                      </fieldset>
                 
                     
-                 <Button variant="outlined"  onClick={(clickEvent) => handleSave(clickEvent)} >
+                 <Button variant="outlined" color='secondary' onClick={(clickEvent) => handleSave(clickEvent)} >
                   Save
                  </Button>
                    
-            </form>   
+            </form>                 </ThemeProvider>    
+
     </>
         )}

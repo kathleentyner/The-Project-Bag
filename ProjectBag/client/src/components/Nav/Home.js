@@ -8,54 +8,77 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import CardMedia from '@mui/material/CardMedia';
+import narrowlogo from './narrowlogo.png'
 
+const theme = createTheme({
+  palette: {
+      light: '#0494AD',
+      main: '#00768B',
+      dark: '#015362',
+   
+      background: {
+      default: '#F2EEE3',
+      },
 
-const cards = [1, 2, 3, 4, 5, 6];
+      secondary:{
+        main: "#00768B"
+      }
+}});
 
-const theme = createTheme();
 
 export const Home = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
     
-      <main>
+
         {/* Hero unit */}
         <Box
           sx={{
-            bgcolor: '#d7e4fc',
+            bgcolor: '#F2EEE3',
             pt: 8,
             pb: 6,
           }}
         >
-          <Container maxWidth="lg">
-            <Typography
-              component="h1"
-              variant="h2"
-              align="center"
-              color="text.primary"
-              gutterBottom
-            >
-            The Project Bag
-            </Typography>
-            <Typography variant="h5" align="center" color="text.secondary" paragraph>
-            Organize and Inspire
-            </Typography>
-            <Stack
+       
+          <Box
+         display='flex' 
+        alignItems='center' 
+        justify='center'
+       >
+           
+        <Container >
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: "center"
+      }}
+    >
+      <img 
+  alt='Project Bag logo'
+  src={narrowlogo}
+  width={800}
+  align="center"
+
+   />
+       </Box>
+       </Container>
+        </Box>
+        </Box>
+        <Stack
               sx={{ pt: 4 }}
               direction="row"
               spacing={2}
               justifyContent="center"
+              color={"#00768B"}
             >
-              <Button href="/projects"variant="contained">On the Needles</Button>
-              <Button href="/yarn" variant="contained">View Your Stash</Button>
-              <Button href="/resources" variant = "contained">Get Inspired</Button>
+              <Button color="secondary" href="/project"variant="contained" > On the Needles</Button>
+              <Button color="secondary" href="/yarn" variant="contained" >View Your Stash</Button>
+              <Button color="secondary" href="/resources" variant = "contained" >Get Inspired</Button>
             </Stack>
-          </Container>
-        </Box>
-       
          
-      </main>
+
     </ThemeProvider>
 
   );

@@ -4,13 +4,14 @@ import {addProject, getAllProjects} from "../../APIManagers/ProjectManager"
 import "./Form.css"
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Button from '@mui/material/Button';
 import { getAllFibers } from "../../APIManagers/FIberManager";
 import { getAllWeights } from "../../APIManagers/WeightManager";
+import Typography from '@mui/material/Typography';
+import narrowlogo from '../Nav/narrowlogo.png'
 
 
 
@@ -84,42 +85,64 @@ const selectListWeight = (event) => {
     update(copy)
 }
 
-const theme = createTheme();
+const theme = createTheme({
+    palette: {
+        light: '#0494AD',
+        main: '#00768B',
+        dark: '#015362',
+     
+        background: {
+        default: '#F2EEE3',
+        },
+  
+        secondary:{
+          main: "#00768B"
+        }
+  }});
 
     return ( <>
-        <ThemeProvider theme={theme}>
+<ThemeProvider theme={theme}>
           <CssBaseline />
-    
-            <Box
-          sx={{
-            bgcolor: '#d7e4fc',
-            pt: 8,
-            pb: 6,
-          }}
-        >
-              <Container maxWidth="lg">
-                <Typography
-                  component="h1"
-                  variant="h2"
-                  align="center"
-                  color="text.primary"
-                  gutterBottom
-                >
-                 Project Details
-                </Typography>
-                <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                What's On Your Needles?
-                </Typography>
+          <Box
+                sx={{
+                    bgcolor: '#F2EEE3',
+                    pt: 8,
+                    pb: 6,
+                }}
+
+                display='flex'
+                alignItems='center'
+                justify='center'>
+            
+                    <Container >
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                justifyContent: "center"
+                            }}
+                        >
+                            <img
+                                alt='Project Bag logo'
+                                src={narrowlogo}
+                                width={800}
+                                align="center"
+
+                            />
+                        </Box>
+                    
+            
                 <Stack
                   sx={{ pt: 4 }}
                   direction="row"
                   spacing={2}
                   justifyContent="center"
-                >
+                >    <Typography variant="h5" align="center" color="#545454"  paragraph>
+                What's On Your Needles?
+                </Typography>
                 </Stack>
-              </Container>
+                </Container>
             </Box>         
-              </ThemeProvider>    
+           
               <form className="projectform">
               <fieldset>
                     <div className="form-group">
@@ -262,10 +285,11 @@ const theme = createTheme();
                      </fieldset>
                 
                     
-                 <Button variant="outlined"  onClick={(clickEvent) => handleSave(clickEvent)} >
+                 <Button variant="contained" color='secondary' onClick={(clickEvent) => handleSave(clickEvent)} >
                   Submit
                  </Button>
                    
             </form>   
+            </ThemeProvider>    
     </>
         )}

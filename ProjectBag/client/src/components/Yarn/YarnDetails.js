@@ -15,7 +15,9 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
-
+import Stack from '@mui/material/Stack';
+import Container from '@mui/material/Container';
+import narrowlogo from '../Nav/narrowlogo.png'
 
 export const YarnDetails = () => {
     const [yarn, setYarn] = useState();
@@ -53,8 +55,66 @@ export const YarnDetails = () => {
       </Alert>
       </>)
     }
+    const theme = createTheme({
+      palette: {
+          light: '#0494AD',
+          main: '#00768B',
+          dark: '#015362',
+       
+          background: {
+          default: '#F2EEE3',
+          },
     
+          secondary:{
+            main: "#00768B"
+          }
+    }});
+
     return (
+      <>
+      <ThemeProvider theme={theme}>
+                <CssBaseline />
+          
+                  <Box
+                 sx={{
+                  bgcolor: '#F2EEE3',
+                  pt: 8,
+                  pb: 6,
+              }}
+       
+              display='flex'
+              alignItems='center'
+              justify='center'>
+                    <Container >
+                    <Container>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                justifyContent: "center"
+                            }}
+                        >
+                            <img
+                                alt='Project Bag logo'
+                                src={narrowlogo}
+                                width={800}
+                                align="center"
+
+                            />
+                        </Box>
+                        </Container>
+              
+                <Typography variant="h5" align="center" color="#545454"  paragraph>
+                What's In Your Stash?
+                </Typography>
+                <Stack
+                  sx={{ pt: 4 }}
+                  direction="row"
+                  spacing={2}
+                  justifyContent="center"
+                >
+                </Stack>
+              </Container>
+            </Box>         
         
         <Grid
         container
@@ -77,28 +137,31 @@ export const YarnDetails = () => {
         <Typography gutterBottom variant="h5" component="div">
           {yarn.brand}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-        <List sx={{ width: '100%', maxWidth: 700, bgcolor: 'background.paper' }}>
-        <ListItemText primary="Color" secondary= {yarn.color} />
-        <ListItem>
-        <ListItemText primary="Quantity" secondary={yarn.quantity} />
+        <Typography variant="body2" color="#545454">
+        <List sx={{ width: '100%', maxWidth: 700, bgcolor: '#F2EEE3' }}>
+        <ListItem sx={{ bgcolor: '#F2EEE3'}}  >         
+        <ListItemText sx={{color:"#545454"}} primary="Color" secondary= {yarn.color} />
+        </ListItem>
+        <ListItem sx={{ bgcolor: '#F2EEE3'}}  >         
+        <ListItemText sx={{color:"#545454"}}  primary="Quantity" secondary={yarn.quantity} />
       </ListItem>
-      <ListItem>
-    <ListItemText primary="Fiber" secondary= {yarn.fiberTag.name} />
+      <ListItem sx={{ bgcolor: '#F2EEE3'}}  >         
+        <ListItemText sx={{color:"#545454"}}  primary="Fiber" secondary= {yarn.fiberTag.name} />
       </ListItem>
-      <ListItem> 
-      <ListItemText primary="Yarn Weight" secondary= {yarn.weightTag.name} />
+      <ListItem sx={{ bgcolor: '#F2EEE3'}}  >         
+        <ListItemText sx={{color:"#545454"}}  primary="Yarn Weight" secondary= {yarn.weightTag.name} />
       </ListItem>
     </List>
         </Typography>
        
         <Button variant="contained" 
-        padding={1} 
+        padding={1} color='secondary'
         align="center"  onClick={() => navigate(`/yarn/edit/${yarn.id}`)}>Edit</Button>
      
      <><Button
         variant="outline"
         align="center"
+        color='secondary'
         padding={1}
         onClick={() => {
           setShowAlert(true);      
@@ -114,5 +177,7 @@ export const YarnDetails = () => {
 
         </Grid>      
        </Grid>
+       </ThemeProvider>
+       </>
     )
     }

@@ -12,10 +12,9 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CardMedia from '@mui/material/CardMedia';
-//import ManageProjectYarn from '../ProjectYarn/ManageProjectYarn';
+import narrowlogo from '../Nav/narrowlogo.png'
 
 
-//list out all the reaction entries
 export const YarnList = () => {
    const [yarn, setYarns] = useState([])
 
@@ -33,38 +32,67 @@ useEffect(() => {
 const create = () => {
   navigate("/yarn/new")
 }
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+      light: '#0494AD',
+      main: '#00768B',
+      dark: '#015362',
+   
+      background: {
+      default: '#F2EEE3',
+      },
+
+      secondary:{
+        main: "#00768B"
+      }
+}});
+
              
    return (
     <div>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         {/* Hero unit */}
-        <Box sx={{ bgcolor: '#d7e4fc', pt: 8, pb: 6 }}>
-          <Container maxWidth="lg">
-            <Typography
-              component="h1"
-              variant="h2"
-              align="center"
-              color="text.primary"
-              gutterBottom
-            >
-              Yarn Stash
-            </Typography>
-            <Typography variant="h5" align="center" color="text.secondary" paragraph>
-              My Yarn
+        <Box
+                 sx={{
+                  bgcolor: '#F2EEE3',
+                  pt: 8,
+                  pb: 6,
+              }}
+       
+              display='flex'
+              alignItems='center'
+              justify='center'
+              >
+                    <Container >
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                justifyContent: "center"
+                            }}
+                        >
+                            <img
+                                alt='Project Bag logo'
+                                src={narrowlogo}
+                                width={800}
+                                align="center"
+
+                            />
+                        </Box>
+                        
+            <Typography variant="h5" align="center" color="#545454" paragraph>
+             What's in My Yarn Stash
             </Typography>
             <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
-              {/* Your content here */}
-            </Stack>
-          </Container>
-          <Box m={1} display="flex" justifyContent="center" alignItems="center">
+            <Box m={1} display="flex" justifyContent="center" alignItems="center">
             <Button onClick={create}>
               Add A New Yarn
             </Button>
-          </Box>
+          </Box>           
+           </Stack>
+          </Container>
+          
         </Box>
-      </ThemeProvider>
   
       <Box
         sx={{
@@ -77,13 +105,26 @@ const theme = createTheme();
             paddingBottom: 20,
           },
         }}
-      >  
+      >   
         {yarn.map((yarn) => {
           return (
             <section className="card" key={yarn.id}>
               <header>
-                <h3><Link to={`/yarn/${yarn.id}`}>{yarn.brand}</Link></h3>
-                <h3>Color: {yarn.color}</h3>
+              <Typography variant="h5" align="center" color="#545454" fontFamily={'sans-serif'} paragraph>
+
+                <Link to={`/yarn/${yarn.id}`}>{yarn.brand}</Link>
+                </Typography>
+                <Typography variant="h6" align="center" color="#545454" paragraph>
+
+                Color: {yarn.color}
+                </Typography>
+                <CardMedia
+      component="img"
+      height="200"
+      width="200"
+      image={yarn.yarnUrl}
+      alt="yarn"
+    />
               </header>
              
               <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
@@ -91,7 +132,8 @@ const theme = createTheme();
               </Stack>
             </section>
           )})}
-      </Box>
-   </div>
+      </Box></ThemeProvider>
+   </div>      
+
    )
       }
