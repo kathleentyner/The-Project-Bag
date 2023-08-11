@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using ProjectBag.Models;
 using ProjectBag.Utils;
 using ProjectBag.Repositories;
-
+using System.Reflection;
 
 namespace ProjectBag.Repositories
 {
@@ -24,7 +24,7 @@ namespace ProjectBag.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id, Type, Description, ResourceUrl
+                        SELECT Id, Type, Description, Title, ResourceUrl
                         FROM Resources";
 
                     var reader = cmd.ExecuteReader();
@@ -36,8 +36,8 @@ namespace ProjectBag.Repositories
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
                             Type = DbUtils.GetString(reader, "Type"),
-
-                           Description = DbUtils.GetString(reader, "Description"),
+                            Title = DbUtils.GetString(reader, "Title"),
+                            Description = DbUtils.GetString(reader, "Description"),
 
                             ResourceUrl = DbUtils.GetString(reader, "ResourceUrl")
                         });
@@ -60,7 +60,7 @@ namespace ProjectBag.Repositories
                 {
 
                     cmd.CommandText = @"
-                        SELECT Id, Type, Description, ResourceUrl
+                        SELECT Id, Type, Description, Title, ResourceUrl
                         FROM Resources
                         WHERE Id = @Id"
                     ;
@@ -76,9 +76,8 @@ namespace ProjectBag.Repositories
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
                             Type = DbUtils.GetString(reader, "Type"),
-
+                            Title = DbUtils.GetString(reader, "Title"),
                             Description = DbUtils.GetString(reader, "Description"),
-
                             ResourceUrl = DbUtils.GetString(reader, "ResourceUrl")
                         };
                     }
@@ -98,11 +97,12 @@ namespace ProjectBag.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        INSERT INTO Resources(Type, Description, ResourceUrl)
+                        INSERT INTO Resources(Type, Description, Title, ResourceUrl)
                         OUTPUT INSERTED.ID
-                        VALUES (@Type, @Description, @ResourceUrl)";
+                        VALUES (@Type, @Title, @Description, @ResourceUrl)";
 
                     DbUtils.AddParameter(cmd, "@Type", resource.Type);
+                    DbUtils.AddParameter(cmd, "@Title", resource.Title);
                     DbUtils.AddParameter(cmd, "@Description", resource.Description);
                     DbUtils.AddParameter(cmd, "@ResourceUrl", resource.ResourceUrl);
 
@@ -140,15 +140,18 @@ namespace ProjectBag.Repositories
                 {
                     cmd.CommandText = @"
                        UPDATE Resources
-                       SET Type = @Type
-                       Set Description = @Description
-                        set ResourceUrl = @ResourceUrl
+                       SET Type = @Type,
+                       Title = @Title,
+                       Description = @Description,
+                       ResourceUrl = @ResourceUrl
                        WHERE Id = @Id"
                     ;
 
                     DbUtils.AddParameter(cmd, "@Type", resource.Type);
+                    DbUtils.AddParameter(cmd, "@Title", resource.Title);
                     DbUtils.AddParameter(cmd, "@Description", resource.Description);
                     DbUtils.AddParameter(cmd, "@ResourceUrl", resource.ResourceUrl);
+                    DbUtils.AddParameter(cmd, "@Id", resource.Id);
 
                     cmd.ExecuteNonQuery();
                 }

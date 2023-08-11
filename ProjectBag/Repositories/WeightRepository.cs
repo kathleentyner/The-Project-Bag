@@ -110,7 +110,7 @@ namespace ProjectBag.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        DELETE FROM FiberTag
+                        DELETE FROM WeightTag
                         WHERE Id = @Id";
 
                     DbUtils.AddParameter(cmd, "@Id", id);
