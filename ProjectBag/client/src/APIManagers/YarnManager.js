@@ -38,3 +38,8 @@ export const deleteYarn = (id) => {
         },
         body: JSON.stringify(yarn)
     })}
+    //search the database
+export const searchYarns = (query)=> { 
+    return fetch(`${baseUrl}/search?query=${query}&sortDesc=true`)
+    .then((res)=> res.json())
+  };

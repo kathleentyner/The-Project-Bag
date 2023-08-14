@@ -39,4 +39,9 @@ export const deleteProject = (id) => {
         },
         body: JSON.stringify(project)
     })
-}
+};
+//search the database
+export const searchProjects = (query)=> { 
+    return fetch(`${baseUrl}/search?query=${query}&sortDesc=true`)
+    .then((res)=> res.json())
+  };
