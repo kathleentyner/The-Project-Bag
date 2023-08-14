@@ -64,20 +64,8 @@ export const ManageProjectYarn = ({ yarn, project }) => {
   return (     
      <ThemeProvider theme={theme}>
     <CssBaseline /> 
-    <Box
-        sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          flexDirection: 'row', 
-          '& > :not(style)': {
-            m: 1,
-            width: 400,
-            height: 350,
-            paddingBottom: 20,
-          },
-        }}
-      >      
-        <Card sx={{ maxWidth:400} }   >
+         
+    <Card sx={{ maxWidth:400,  bgcolor: '#545454'} } key={yarn.id}  >
    <CardActionArea>
 
     <CardContent>
@@ -88,8 +76,11 @@ export const ManageProjectYarn = ({ yarn, project }) => {
       image={yarn.yarnUrl}
       alt="yarn"
     />
-    <Typography gutterBottom variant="h5" component="div">
-        Brand: {yarn.brand}; Colorway: {yarn.color}
+    <Typography gutterBottom variant="h6" color='#F2EEE3'component="div">
+        Brand: {yarn.brand} 
+        </Typography>
+        <Typography gutterBottom variant="body1" color='#F2EEE3'component="div">
+        Colorway: {yarn.color}
         </Typography>
    
         {yarnAdded ? (
@@ -104,7 +95,6 @@ export const ManageProjectYarn = ({ yarn, project }) => {
       </CardContent>
     </CardActionArea>
     </Card>
-    </Box>
   </ThemeProvider>
 
   )

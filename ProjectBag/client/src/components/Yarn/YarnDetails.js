@@ -49,10 +49,13 @@ export const YarnDetails = () => {
   
     const deleteYarnAlert = () => {
       return (<>
-      <Alert color="danger" key={'danger'}>
+       <Alert color="danger" key={'danger'}>
+      <Typography paddingLeft={6} paddingBottom={3} align="left" color="#F2EEE3" fontFamily={'sans-serif'} >
+
         Are you sure you want to delete this yarn?
-        <br></br><Link onClick={handleDelete}>Yes</Link> / <Link onClick={handleCancel}>No</Link>
-      </Alert>
+        <br></br><Link style={{ color: '#F2EEE3' }} onClick={handleDelete}>Yes</Link> / <Link style={{ color: '#F2EEE3' }} onClick={handleCancel}>No</Link>
+        </Typography>
+        </Alert>
       </>)
     }
     const theme = createTheme({
@@ -124,45 +127,46 @@ export const YarnDetails = () => {
         justify="center"
         style={{ minHeight: '100vh' }}
        >
-        <Grid item xs={3}>
-        <Card sx={{ maxWidth:800} }  display ="flex">
+      
+     
+      <Card sx={{ maxWidth:600, bgcolor: '#545454',  }}  display ="flex" bgcolor="#545454" >
    <CardActionArea>
-   <CardMedia
+
+      <CardMedia
         component="img"
-        height="140"
+        height="600"
         image={yarn.yarnUrl} 
-        alt= "single project"
+        alt= "single yarn"
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="h5" color="#545454" component="div">
           {yarn.brand}
         </Typography>
         <Typography variant="body2" color="#545454">
         <List sx={{ width: '100%', maxWidth: 700, bgcolor: '#F2EEE3' }}>
         <ListItem sx={{ bgcolor: '#F2EEE3'}}  >         
-        <ListItemText sx={{color:"#545454"}} primary="Color" secondary= {yarn.color} />
+        <ListItemText sx={{color:"#545454"}} primary="Color" color="#545454" secondary= {yarn.color} />
         </ListItem>
         <ListItem sx={{ bgcolor: '#F2EEE3'}}  >         
-        <ListItemText sx={{color:"#545454"}}  primary="Quantity" secondary={yarn.quantity} />
+        <ListItemText sx={{color:"#545454"}}  primary="Quantity" color="#545454" secondary={yarn.quantity} />
       </ListItem>
       <ListItem sx={{ bgcolor: '#F2EEE3'}}  >         
-        <ListItemText sx={{color:"#545454"}}  primary="Fiber" secondary= {yarn.fiberTag.name} />
+        <ListItemText sx={{color:"#545454"}}  primary="Fiber" color="#545454" secondary= {yarn.fiberTag.name} />
       </ListItem>
       <ListItem sx={{ bgcolor: '#F2EEE3'}}  >         
-        <ListItemText sx={{color:"#545454"}}  primary="Yarn Weight" secondary= {yarn.weightTag.name} />
+        <ListItemText sx={{color:"#545454"}}  primary="Yarn Weight" color="#545454" secondary= {yarn.weightTag.name} />
       </ListItem>
     </List>
         </Typography>
        
-        <Button variant="contained" 
-        padding={1} color='secondary'
-        align="center"  onClick={() => navigate(`/yarn/edit/${yarn.id}`)}>Edit</Button>
+        <Button sx={{  margin: 3 }} variant="contained" 
+        padding={5} 
+        align="center" color='secondary'  onClick={() => navigate(`/yarn/edit/${yarn.id}`)}>Edit</Button>
      
-     <><Button
-        variant="outline"
-        align="center"
-        color='secondary'
-        padding={1}
+     <> <Button sx={{  margin: 3, }} variant="contained" color='secondary'
+        align="left"
+        padding={5}
+       
         onClick={() => {
           setShowAlert(true);      
         }}> 
@@ -176,7 +180,7 @@ export const YarnDetails = () => {
 
 
         </Grid>      
-       </Grid>
+   
        </ThemeProvider>
        </>
     )

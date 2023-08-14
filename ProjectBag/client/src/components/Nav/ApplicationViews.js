@@ -47,7 +47,7 @@ export const ApplicationViews =() => {
           <Route path="/resource/new" element = {<ResourceForm />} />
           <Route path ="/resource/edit/:resourceId" element = {<ResourceEdit />} />
           <Route path="/notions" element={<FiberAndWeight /> } />      
-          
+
 
     </Routes>
    );

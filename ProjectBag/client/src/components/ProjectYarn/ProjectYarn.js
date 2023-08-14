@@ -118,7 +118,19 @@ export const ProjectYarn = () => {
             </Container>
         </Box>
 
-    
+        <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          flexDirection: 'row', 
+         '& > :not(style)': {
+             m: 1,
+            width: 400,
+            height: 350,
+            paddingBottom: 20,
+          },
+        }}
+      > 
                         
                   
 
@@ -131,7 +143,7 @@ export const ProjectYarn = () => {
                                 
                             ))}
                 
-        
+        </Box>
     </ThemeProvider>
     )
 }

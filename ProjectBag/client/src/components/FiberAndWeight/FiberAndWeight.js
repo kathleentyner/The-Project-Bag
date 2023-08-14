@@ -11,7 +11,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import narrowlogo from '../Nav/narrowlogo.png';
-import weight from './weight.jpg'
+import gauge from './gauge.png'
 
 export const FiberAndWeight = () => {
   const [fibers, setFibers] = useState([]);
@@ -154,7 +154,12 @@ My Yarn Weights
             </Button>
             </Grid>
 <Grid>
-  <Box
+
+         
+      </Grid>
+      </Grid>
+      </Grid>
+      <Box
             sx={{
               display: 'flex',
               justifyContent: "center"
@@ -162,16 +167,11 @@ My Yarn Weights
           >
             <img
               alt='yarn weight chart'
-              src={weight}
-              width={300}
+              src={gauge}
               align='center'
               paddingBottom={6}
             />
             </Box>
-         
-      </Grid>
-      </Grid>
-      </Grid>
     </ThemeProvider>
   );
 };

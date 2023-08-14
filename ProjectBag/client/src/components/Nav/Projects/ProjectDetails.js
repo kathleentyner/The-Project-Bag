@@ -53,12 +53,9 @@ export const ProjectDetails = () => {
     const deleteProjectAlert = () => {
       return (<>
       <Alert color="danger" key={'danger'}>
-      <Typography paddingLeft={6} paddingBottom={3} align="left" color="#F2EEE3" fontFamily={'sans-serif'} >
-
         Are you sure you want to delete this project?
-        <br></br><Link style={{ color: '#F2EEE3' }} onClick={handleDelete}>Yes</Link> / <Link style={{ color: '#F2EEE3' }} onClick={handleCancel}>No</Link>
-        </Typography>
- </Alert>
+        <br></br><Link onClick={handleDelete}>Yes</Link> / <Link onClick={handleCancel}>No</Link>
+      </Alert>
       </>)
     }
     const theme = createTheme({
@@ -68,8 +65,7 @@ export const ProjectDetails = () => {
           dark: '#015362',
        
           background: {
-          default:  '#F2EEE3',
-        
+          default: '#F2EEE3',
           },
     
           secondary:{
@@ -134,12 +130,11 @@ export const ProjectDetails = () => {
         direction="column"
         alignItems="center"
         justify="center"
-        paddingBottom={20}
         style={{ minHeight: '100vh' }}
        >
       
-  
-        <Card sx={{ maxWidth:600, bgcolor: '#545454',  }}  display ="flex" bgcolor="#545454" >
+        <Grid item xs={3}>
+        <Card sx={{ maxWidth:800} }  display ="flex">
    <CardActionArea>
 
       <CardMedia
@@ -158,7 +153,7 @@ export const ProjectDetails = () => {
                         <ListItemText sx={{color:"#545454"}} primary="Designer" color="#545454" secondary={project.designer} />
                       </ListItem>
                       <ListItem sx={{ bgcolor: '#F2EEE3' }}>
-                      <ListItemText sx={{color:"#545454"}} primary="Pattern Name" color="#545454" secondary=<Link to={project.patternUrl} style={{ color: '#545454' }}>{project.patternName}</Link> />
+                      <ListItemText sx={{color:"#545454"}} primary="Pattern Name" color="#545454" secondary=<Link sx={{color:"#545454"}} to={project.patternUrl} style={{ color: '#545454' }}>{project.patternName}</Link> />
  
                       </ListItem>
                       <ListItem sx={{ bgcolor: '#F2EEE3' }}>
@@ -184,32 +179,33 @@ export const ProjectDetails = () => {
                       </ListItem>
                     </List>
         </Typography>
-        <Button sx={{  margin: 3 }}variant="contained" color='secondary'
-      
-         onClick={() => navigate(`/manageyarn/${id}`)}>Manage Yarn</Button>
+        <Button variant="contained" 
+        padding={1} color='secondary'
+        align="center"  onClick={() => navigate(`/manageyarn/${id}`)}>Manage Yarn</Button>
 
 
-        <Button sx={{  margin: 3 }} variant="contained" 
-        padding={5} 
-        align="center" color='secondary' onClick={() => navigate(`/project/edit/${project.id}`)}>Edit</Button>
+        <Button variant="contained" 
+        padding={1} color='secondary'
+        align="center"  onClick={() => navigate(`/project/edit/${project.id}`)}>Edit</Button>
      
-     <Button sx={{  margin: 3, }} variant="contained" color='secondary'
-        align="left"
-        padding={5}
-       
+     <><Button
+        variant="outline"
+        align="center"
+        padding={1}
+        color='secondary'
         onClick={() => {
           setShowAlert(true);      
         }}> 
         Delete
       </Button>
         {showAlert && deleteProjectAlert()}
-        
+        </>
       </CardContent>
     </CardActionArea>
 </Card>
 
 
-           
+        </Grid>      
        </Grid>
        </ThemeProvider>
        </>

@@ -1,27 +1,26 @@
 import {useEffect, useState} from "react"
-import {useNavigate} from "react-router-dom"
-import {addProject, getAllProjects} from "../../APIManagers/ProjectManager"
+import {useNavigate, useParams} from "react-router-dom"
+import {editProject, getProjectById} from "../../APIManagers/ProjectManager"
 import "./Form.css"
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Button from '@mui/material/Button';
 import { getAllFibers } from "../../APIManagers/FIberManager";
 import { getAllWeights } from "../../APIManagers/WeightManager";
-import Typography from '@mui/material/Typography';
 import narrowlogo from '../Nav/narrowlogo.png'
-import Card from '@mui/material/Card';
 
 
-export const ProjectForm = () => {
+
+export const ProjectEdit = () => {
     const navigate = useNavigate()
-
+    const { projectId } = useParams();
     const [weights, setWeights] = useState([])
      const [fibers, setFibers] = useState([])
-
-    const getFibers = () => {
+      const getFibers = () => {
          getAllFibers().then(allFibers => setFibers(allFibers));
    }
    const getWeights = () => {
@@ -34,7 +33,7 @@ export const ProjectForm = () => {
      }, [])
 
 
-    const [project, update] = useState({
+    const [editedProject, updateProject] = useState({
         patternName: "",
         designer: "",
         patternUrl: "",
@@ -47,43 +46,50 @@ export const ProjectForm = () => {
         userId: 0
      
     })
+    useEffect(() => {
+        getProjectById(projectId)
+        .then((projects) => {
+            updateProject(projects)
+        })
+    }, [projectId]);
 
     const handleSave = (event) => {
         event.preventDefault()
-
-        const projectToAPI = {
-            PatternName: project.patternName,
-            Designer: project.designer,
-            PatternUrl: project.patternUrl,
-            PhotoUrl: project.photoUrl,
-            Notes: project.notes,
-            StartDate: new Date().toISOString(),
-            EndDate: new Date().toISOString(),
-            FiberId: project.fiberId,
-            WeightId: project.weightId,
-            UserId: 1
-          
+        const projectToEdit = {
+            Id: parseInt(projectId),
+            PatternName: editedProject.patternName,
+            Designer: editedProject.designer,
+            PatternUrl: editedProject.patternUrl,
+            PhotoUrl: editedProject.photoUrl,
+            Notes: editedProject.notes,
+            StartDate: editedProject.startDate,
+            EndDate: editedProject.endDate,
+            FiberId: editedProject.fiberId,
+            WeightId: editedProject.weightId,
+            UserId: editedProject.userId
         }
-
-        // how to navigate to the project I just created?
-        return addProject(projectToAPI).then(navigate(`/project`))
-    }
+        return editProject(projectToEdit)
+            .then(() => {
+                navigate(`/project/${editedProject.id}`)
+        })
+        }
   //I've found this method to be very useful when needing to select an item then add it to the database
   const selectListFiber = (event) => {
     const copy = {
-        ...project
+        ...editedProject
     }
     copy.fiberId = event.target.value
-    update(copy)
+    updateProject(copy)
 }
 
 const selectListWeight = (event) => {
     const copy = {
-        ...project
+        ...editedProject
     }
     copy.weightId = event.target.value
-    update(copy)
+    updateProject(copy)
 }
+
 
 const theme = createTheme({
     palette: {
@@ -99,10 +105,10 @@ const theme = createTheme({
           main: "#00768B"
         }
   }});
-
     return ( <>
-<ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
           <CssBaseline />
+    
           <Box
                 sx={{
                     bgcolor: '#F2EEE3',
@@ -113,8 +119,8 @@ const theme = createTheme({
                 display='flex'
                 alignItems='center'
                 justify='center'>
-            
-                    <Container >
+                <Container >
+                    <Container m>
                         <Box
                             sx={{
                                 display: 'flex',
@@ -129,46 +135,33 @@ const theme = createTheme({
 
                             />
                         </Box>
-                    
-            
+                    </Container>
+                <Typography variant="h5" align="center" color="#545454" paragraph>
+                Update your {editedProject.patternName}
+                </Typography>
                 <Stack
                   sx={{ pt: 4 }}
                   direction="row"
                   spacing={2}
                   justifyContent="center"
-                >    <Typography variant="h5" align="center" color="#545454"  paragraph>
-                What's On Your Needles?
-                </Typography>
-               
+                >
                 </Stack>
-                </Container>
-            </Box>         <Box
-                            sx={{
-                                justifyContent: "center",
-                                display:"flex"
-                            }}
-                        > 
-            <Card sx={{   bgcolor: '#F2EEE3', marginBottom: 10, padding: 5 }} bgcolor="#545454" >
-            <form style={{ width: 600, }}>
-            <Typography gutterBottom variant='body1' color='#545454' component='div'>
-            <Typography variant="h6" align="center" color="#545454"  paragraph>
-
-Fill out this form to add a new project.
-</Typography>
-                    < fieldset>
-
+              </Container>
+            </Box>         
+              <form className="projectform">
+              <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description" >Pattern Name: </label>
+                        <label htmlFor="description"><strong>Pattern Name: </strong> </label>
                         <input
                             required autoFocus
                             type="text"
                             className="form-control"
-                            value={project.patternName}
+                            value={editedProject.patternName}
                             onChange={ 
                                 (event) => {
-                                const copy = {...project} 
+                                const copy = {...editedProject} 
                                 copy.patternName = event.target.value 
-                                update(copy)
+                                updateProject(copy)
                             } 
                         }/>
                      </div>
@@ -176,52 +169,52 @@ Fill out this form to add a new project.
                      
                  <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description">Designer:  </label>
+                        <label htmlFor="description"><strong>Designer: </strong> </label>
                         <input
                             required autoFocus
                             type="text"
                             className="form-control"
-                            value={project.designer}
+                            value={editedProject.designer}
                             onChange={ 
                                 (event) => {
-                                const copy = {...project} 
+                                const copy = {...editedProject} 
                                 copy.designer = event.target.value 
-                                update(copy)
+                                updateProject(copy)
                             } 
                         }/>
                      </div>
                      </fieldset>
 
                      <fieldset>
-                    <div className="form-group" >
-                        <label htmlFor="description">Link to Pattern:  </label>
+                    <div className="form-group">
+                        <label htmlFor="description"><strong>Link to Pattern: </strong> </label>
                         <input
                             required autoFocus
                             type="text"
                             className="form-control"
-                            value={project.patternUrl}
+                            value={editedProject.patternUrl}
                             onChange={ 
                                 (event) => {
-                                const copy = {...project} 
+                                const copy = {...editedProject} 
                                 copy.patternUrl = event.target.value 
-                                update(copy)
+                                updateProject(copy)
                             } 
                         }/>
                      </div>
                      </fieldset>
                      <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description">Add Your Needles and Project Notes:  </label>
+                        <label htmlFor="description"><strong>Add Your Needles and Project Notes: </strong> </label>
                         <input
                             required autoFocus
                             type="text"
                             className="form-control"
-                            value={project.notes}
+                            value={editedProject.notes}
                             onChange={ 
                                 (event) => {
-                                const copy = {...project} 
+                                const copy = {...editedProject} 
                                 copy.notes = event.target.value 
-                                update(copy)
+                                updateProject(copy)
                             } 
                         }/>
                      </div>
@@ -229,16 +222,16 @@ Fill out this form to add a new project.
 
                     <fieldset>
                     <div className="form-group">
-                        <label htmlFor="fiber-select">Yarn Fiber Type: </label>
+                        <label htmlFor="fiber-select">Yarn Fiber Type</label>
                         {/* Select that category from the list!! */}
                         <select id="type"
                             value={
-                                project.fiberId
+                                editedProject.fiberId
                             }
                             onChange={
                                 event => selectListFiber(event)
                         }>
-                            <option value="0">Select the Fiber Type: </option>
+                            <option value="0">Select the Fiber Type</option>
                             {
                             fibers.map(fiber => {
                                 return <option value={fiber.id} key={
@@ -255,16 +248,16 @@ Fill out this form to add a new project.
                     
                     <fieldset>
                     <div className="form-group">
-                        <label htmlFor="weight-select">Yarn Weight </label>
+                        <label htmlFor="weight-select">Yarn Weight</label>
                         {/* Select that category from the list!! */}
                         <select id="type"
                             value={
-                                project.weightId
+                                editedProject.weightId
                             }
                             onChange={
                                 event => selectListWeight(event)
                         }>
-                            <option value="0">Select the Yarn Weight </option>
+                            <option value="0">Select the Yarn Weight</option>
                             {
                             weights.map(weight => {
                                 return <option value={weight.id} key={
@@ -280,31 +273,28 @@ Fill out this form to add a new project.
 
                     <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description"> Project Photo:  </label>
+                        <label htmlFor="description"><strong> Project Photo: </strong> </label>
                         <input
                             required autoFocus
                             type="text"
                             className="form-control"
-                            value={project.photoUrl}
+                            value={editedProject.photoUrl}
                             onChange={ 
                                 (event) => {
-                                const copy = {...project} 
+                                const copy = {...editedProject} 
                                 copy.photoUrl = event.target.value 
-                                update(copy)
+                                updateProject(copy)
                             } 
                         }/>
                      </div>
                      </fieldset>
                 
-                 <Button variant="contained" color='secondary' onClick={(clickEvent) => handleSave(clickEvent)} >
-                  Submit
-                 </Button>
-                 </Typography>
-                 </form>   
                     
-                 </Card>
-                 </Box> 
-                 
-            </ThemeProvider>    
+                 <Button variant="outlined" color='secondary' onClick={(clickEvent) => handleSave(clickEvent)} >
+                  Save
+                 </Button>
+                   
+            </form>                 </ThemeProvider>    
+
     </>
         )}

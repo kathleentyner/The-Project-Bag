@@ -10,6 +10,10 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import CardMedia from '@mui/material/CardMedia';
 import narrowlogo from './narrowlogo.png'
+import library from './library.png'
+import projects from './projects.png'
+import yarn from './yarn.png'
+
 
 const theme = createTheme({
   palette: {
@@ -66,20 +70,54 @@ export const Home = () => {
        </Container>
         </Box>
         </Box>
-        <Stack
-              sx={{ pt: 4 }}
-              direction="row"
-              spacing={2}
-              justifyContent="center"
-              color={"#00768B"}
-            >
-              <Button color="secondary" href="/project"variant="contained" > On the Needles</Button>
-              <Button color="secondary" href="/yarn" variant="contained" >View Your Stash</Button>
-              <Button color="secondary" href="/resources" variant = "contained" >Get Inspired</Button>
-            </Stack>
-         
+        <Container
+        maxWidth="md"
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: 16,
+        }}
+      >
+        <Box>
+          <img
+            alt="yarn weight chart"
+            src={projects}
+            width={200}
+            align="center"
+            paddingBottom={6}
+          />
+          <Button color="secondary" align='center' href="/project" variant="contained">
+            On the Needles
+          </Button>
+        </Box>
 
+        <Box>
+          <img
+            alt="yarn weight chart"
+            src={yarn}
+            align="center"
+            width={200}
+            paddingBottom={6}
+          />
+          <Button color="secondary" position='center' href="/yarn" variant="contained">
+            View Your Stash
+          </Button>
+        </Box>
+
+        <Box>
+          <img
+            alt="yarn weight chart"
+            src={library}
+            width={200}
+            align="center"
+            paddingBottom={6}
+          />
+          <Button color="secondary" align='center'  href="/resources" variant="contained">
+            Get Inspired
+          </Button>
+        </Box>
+      </Container>
     </ThemeProvider>
-
   );
 }

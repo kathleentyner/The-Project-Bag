@@ -12,7 +12,7 @@ import { getAllFibers } from "../../APIManagers/FIberManager";
 import { getAllWeights } from "../../APIManagers/WeightManager";
 import Typography from '@mui/material/Typography';
 import narrowlogo from '../Nav/narrowlogo.png'
-import Card from '@mui/material/Card';
+
 
 
 export const ProjectForm = () => {
@@ -139,26 +139,14 @@ const theme = createTheme({
                 >    <Typography variant="h5" align="center" color="#545454"  paragraph>
                 What's On Your Needles?
                 </Typography>
-               
                 </Stack>
                 </Container>
-            </Box>         <Box
-                            sx={{
-                                justifyContent: "center",
-                                display:"flex"
-                            }}
-                        > 
-            <Card sx={{   bgcolor: '#F2EEE3', marginBottom: 10, padding: 5 }} bgcolor="#545454" >
-            <form style={{ width: 600, }}>
-            <Typography gutterBottom variant='body1' color='#545454' component='div'>
-            <Typography variant="h6" align="center" color="#545454"  paragraph>
-
-Fill out this form to add a new project.
-</Typography>
-                    < fieldset>
-
+            </Box>         
+           
+              <form className="projectform">
+              <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description" >Pattern Name: </label>
+                        <label htmlFor="description"><strong>Pattern Name: </strong> </label>
                         <input
                             required autoFocus
                             type="text"
@@ -176,7 +164,7 @@ Fill out this form to add a new project.
                      
                  <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description">Designer:  </label>
+                        <label htmlFor="description"><strong>Designer: </strong> </label>
                         <input
                             required autoFocus
                             type="text"
@@ -193,8 +181,8 @@ Fill out this form to add a new project.
                      </fieldset>
 
                      <fieldset>
-                    <div className="form-group" >
-                        <label htmlFor="description">Link to Pattern:  </label>
+                    <div className="form-group">
+                        <label htmlFor="description"><strong>Link to Pattern: </strong> </label>
                         <input
                             required autoFocus
                             type="text"
@@ -211,7 +199,7 @@ Fill out this form to add a new project.
                      </fieldset>
                      <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description">Add Your Needles and Project Notes:  </label>
+                        <label htmlFor="description"><strong>Add Your Needles and Project Notes: </strong> </label>
                         <input
                             required autoFocus
                             type="text"
@@ -229,7 +217,7 @@ Fill out this form to add a new project.
 
                     <fieldset>
                     <div className="form-group">
-                        <label htmlFor="fiber-select">Yarn Fiber Type: </label>
+                        <label htmlFor="fiber-select">Yarn Fiber Type</label>
                         {/* Select that category from the list!! */}
                         <select id="type"
                             value={
@@ -238,7 +226,7 @@ Fill out this form to add a new project.
                             onChange={
                                 event => selectListFiber(event)
                         }>
-                            <option value="0">Select the Fiber Type: </option>
+                            <option value="0">Select the Fiber Type</option>
                             {
                             fibers.map(fiber => {
                                 return <option value={fiber.id} key={
@@ -255,7 +243,7 @@ Fill out this form to add a new project.
                     
                     <fieldset>
                     <div className="form-group">
-                        <label htmlFor="weight-select">Yarn Weight </label>
+                        <label htmlFor="weight-select">Yarn Weight</label>
                         {/* Select that category from the list!! */}
                         <select id="type"
                             value={
@@ -264,7 +252,7 @@ Fill out this form to add a new project.
                             onChange={
                                 event => selectListWeight(event)
                         }>
-                            <option value="0">Select the Yarn Weight </option>
+                            <option value="0">Select the Yarn Weight</option>
                             {
                             weights.map(weight => {
                                 return <option value={weight.id} key={
@@ -280,7 +268,7 @@ Fill out this form to add a new project.
 
                     <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description"> Project Photo:  </label>
+                        <label htmlFor="description"><strong> Project Photo: </strong> </label>
                         <input
                             required autoFocus
                             type="text"
@@ -296,15 +284,12 @@ Fill out this form to add a new project.
                      </div>
                      </fieldset>
                 
+                    
                  <Button variant="contained" color='secondary' onClick={(clickEvent) => handleSave(clickEvent)} >
                   Submit
                  </Button>
-                 </Typography>
-                 </form>   
-                    
-                 </Card>
-                 </Box> 
-                 
+                   
+            </form>   
             </ThemeProvider>    
     </>
         )}
