@@ -243,7 +243,80 @@ namespace ProjectBag.Repositories
                 }
             }
         }
+        public List<Project> Search(string criterion, bool sortDescending)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    var sql =
+                     @"
 
+                        SELECT p.Id, p.PatternName, p.Designer, p.PatternUrl AS Pattern, p.PhotoURL AS Photo, p.Notes, p.StartDate, p.EndDate, p.Queued, p.FiberId, p.WeightId, p.UserId, u.Id, u.Name, u.Email, f.Id AS FID, w.Id AS WID, f.Name AS FName, w.Name AS WName
+                        FROM Project p                        
+                        LEFT JOIN [User] u ON u.Id = p.UserId
+                        LEFT JOIN FiberTag f ON f.Id = FiberId
+                        LEFT JOIN WeightTag w on w.Id = WeightId
+                       WHERE f.Name LIKE @Criterion OR w.Name LIKE @Criterion";
+
+                    if (sortDescending)
+                    {
+                        sql += " ORDER BY p.patternName DESC";
+                    }
+                    else
+                    {
+                        sql += " ORDER BY p.patternName";
+                    };
+
+                   cmd.CommandText = sql;
+                    DbUtils.AddParameter(cmd, "@Criterion", $"%{criterion}%");
+                    var reader = cmd.ExecuteReader();
+
+                    var projects = new List<Project>();
+                    while (reader.Read())
+                    {
+                        projects.Add(new Project()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            PatternName = DbUtils.GetString(reader, "PatternName"),
+                            Designer = DbUtils.GetString(reader, "Designer"),
+                            PatternUrl = DbUtils.GetString(reader, "Pattern"),
+                            PhotoUrl = DbUtils.GetString(reader, "Photo"),
+                            Notes = DbUtils.GetString(reader, "Notes"),
+                            StartDate = DbUtils.GetDateTime(reader, "StartDate"),
+                            EndDate = DbUtils.GetDateTime(reader, "EndDate"),
+                            Queued = DbUtils.GetBoolean(reader, "Queued"),
+                            UserId = DbUtils.GetInt(reader, "UserId"),
+                            user = new User()
+                            {
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                Name = DbUtils.GetString(reader, "Name"),
+                                Email = DbUtils.GetString(reader, "Email"),
+
+                            },
+                            FiberId = DbUtils.GetInt(reader, "FiberID"),
+                            fiberTag = new Fiber()
+                            {
+                                Id = DbUtils.GetInt(reader, "FID"),
+                                Name = DbUtils.GetString(reader, "FName")
+                            },
+                            WeightId = DbUtils.GetInt(reader, "WeightId"),
+                            weightTag = new Weight()
+                            {
+                                Id = DbUtils.GetInt(reader, "WID"),
+                                Name = DbUtils.GetString(reader, "WName")
+                            }
+                        });
+                    }
+
+
+                    reader.Close();
+
+                    return projects;
+                }
+            }
+        }
 
     }
 }

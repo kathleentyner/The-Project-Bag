@@ -190,6 +190,66 @@ namespace ProjectBag.Repositories
                 }
             }
         }
+        public List<Yarn> Search(string criterion, bool sortDescending)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    var sql =
+                    @"
+
+                        SELECT y.Id, y.Brand, y.Color, y.Quantity, y.YarnUrl, y.FiberId, y.WeightId, f.Id AS FID, w.Id AS WID, f.Name AS FName, w.Name AS WName
+                        FROM Yarn y                        
+                        LEFT JOIN FiberTag f ON f.Id = FiberId
+                        LEFT JOIN WeightTag w on w.Id = WeightId
+                       WHERE f.Name LIKE @Criterion OR w.Name LIKE @Criterion";
+
+                    if (sortDescending)
+                    {
+                        sql += " ORDER BY y.brand DESC";
+                    }
+                    else
+                    {
+                        sql += " ORDER BY y.brand";
+                    };
+
+                    cmd.CommandText = sql;
+                    DbUtils.AddParameter(cmd, "@Criterion", $"%{criterion}%");
+                    var reader = cmd.ExecuteReader();
+
+                    var yarns = new List<Yarn>();
+                    while (reader.Read())
+                    {
+                        yarns.Add(new Yarn()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            Brand = DbUtils.GetString(reader, "Brand"),
+                            Color = DbUtils.GetString(reader, "Color"),
+                            Quantity = DbUtils.GetString(reader, "Quantity"),
+                            YarnUrl = DbUtils.GetString(reader, "YarnUrl"),
+
+                            fiberTag = new Fiber()
+                            {
+                                Id = DbUtils.GetInt(reader, "FID"),
+                                Name = DbUtils.GetString(reader, "FName")
+                            },
+                            weightTag = new Weight()
+                            {
+                                Id = DbUtils.GetInt(reader, "WID"),
+                                Name = DbUtils.GetString(reader, "WName")
+                            }
+                        });
+                    }
+
+                    reader.Close();
+
+                    return yarns;
+                }
+            }
+        }
+
 
 
     }

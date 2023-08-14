@@ -9,5 +9,6 @@ namespace ProjectBag.Repositories
         void EditProject(Project project);
         List<Project> GetAllProjects();
         Project GetProjectById(int id);
+        List<Project> Search(string criterion, bool sortDescending);
     }
 }

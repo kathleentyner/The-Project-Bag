@@ -9,5 +9,6 @@ namespace ProjectBag.Repositories
         void EditYarn(Yarn yarn);
         List<Yarn> GetAllYarns();
         Yarn GetYarnById(int id);
+        List<Yarn> Search(string criterion, bool sortDescending);
     }
 }
