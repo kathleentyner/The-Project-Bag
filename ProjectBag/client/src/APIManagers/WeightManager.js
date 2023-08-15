@@ -31,7 +31,7 @@ export const deleteWeight = (id) => {
 
   export const editWeight = (weight => {
    
-    return fetch(`/api/fiber/${weight.Id}`, {
+    return fetch(`/api/weight/${weight.Id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
