@@ -21,6 +21,11 @@ import { ResourceForm } from "../Resource/ResourceCreate";
 import { ResourceDetails } from "../Resource/ResourceDetails";
 import { ResourceList } from "../Resource/ResourceList";
 import { FiberAndWeight } from "../FiberAndWeight/FiberAndWeight";
+import { FiberEdit } from "../FiberAndWeight/FiberEdit";
+import { WeightEdit } from "../FiberAndWeight/WeightEdit";
+
+
+
 export const ApplicationViews =() => {
 
     return(
@@ -47,6 +52,8 @@ export const ApplicationViews =() => {
           <Route path="/resource/new" element = {<ResourceForm />} />
           <Route path ="/resource/edit/:resourceId" element = {<ResourceEdit />} />
           <Route path="/notions" element={<FiberAndWeight /> } />      
+          <Route path ="/fiber/edit/:fiberId" element = {<FiberEdit />} />
+          <Route path ="/weight/edit/:weightId" element = {<WeightEdit />} />
 
 
     </Routes>

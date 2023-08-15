@@ -9,9 +9,10 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Button from '@mui/material/Button';
-import { getAllFibers } from "../../APIManagers/FIberManager";
+import { getAllFibers } from "../../APIManagers/FiberManager";
 import { getAllWeights } from "../../APIManagers/WeightManager";
 import narrowlogo from '../Nav/narrowlogo.png'
+import Card from '@mui/material/Card';
 
 
 
@@ -112,40 +113,52 @@ export const YarnEdit = () => {
 
                 display='flex'
                 alignItems='center'
-                justify='center'>
+                justify='center'
+            >
                 <Container >
-                    <Container >
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                justifyContent: "center"
-                            }}
-                        >
-                            <img
-                                alt='Project Bag logo'
-                                src={narrowlogo}
-                                width={800}
-                                align="center"
-
-                            />
-                        </Box>
-                    </Container>
-                    <Typography variant="h5" align="center" color="#545454" paragraph>
-                        Update Your {yarn.color} {yarn.brand} Yarn
-                    </Typography>
-                    <Stack
-                        sx={{ pt: 4 }}
-                        direction="row"
-                        spacing={2}
-                        justifyContent="center"
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent: "center"
+                        }}
                     >
+                        <img
+                            alt='Project Bag logo'
+                            src={narrowlogo}
+                            width={800}
+                            align='center'
+
+                        />
+                    </Box>
+               
+                <Stack
+                    sx={{ pt: 4 }}
+                    direction="row"
+                    spacing={2}
+                    justifyContent="center"
+                    > <Typography variant="h5" align="center" color="#545454" paragraph>
+                        Edit Your {yarn.color} {yarn.brand} Yarn
+                    </Typography>
+
                     </Stack>
-                </Container>
+                    </Container>
             </Box>
-            <form className="projectform">
-                <fieldset>
+         
+            <Box
+                sx={{
+                    justifyContent: "center",
+                    display: "flex"
+                }}
+            >
+                <Card sx={{ bgcolor: '#F2EEE3', marginBottom: 10, padding: 5 }} bgcolor="#545454" >
+                    <form style={{ width: 600, }}>
+                        <Typography variant="h6" align="center" color="#545454" paragraph>
+
+                            Fill out this form to edit your yarn details.
+                        </Typography>
+                        < fieldset>
                     <div className="form-group">
-                        <label htmlFor="description"><strong>Brand: </strong> </label>
+                        <label htmlFor="description">Brand:  </label>
                         <input
                             required autoFocus
                             type="text"
@@ -163,7 +176,7 @@ export const YarnEdit = () => {
 
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description"><strong>Colorway: </strong> </label>
+                        <label htmlFor="description">Colorway: </label>
                         <input
                             required autoFocus
                             type="text"
@@ -181,7 +194,7 @@ export const YarnEdit = () => {
 
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description"><strong>Add a Photo Url: </strong> </label>
+                        <label htmlFor="description">Add a Photo Url:  </label>
                         <input
                             required autoFocus
                             type="text"
@@ -198,7 +211,7 @@ export const YarnEdit = () => {
                 </fieldset>
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description"><strong>Quantity: </strong> </label>
+                        <label htmlFor="description">Quantity:  </label>
                         <input
                             required autoFocus
                             type="text"
@@ -216,7 +229,7 @@ export const YarnEdit = () => {
 
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="fiber-select">Yarn Fiber Type</label>
+                        <label htmlFor="fiber-select">Yarn Fiber Type </label>
                         {/* Select that category from the list!! */}
                         <select id="type"
                             value={
@@ -225,7 +238,7 @@ export const YarnEdit = () => {
                             onChange={
                                 event => selectListFiber(event)
                             }>
-                            <option value="0">Select the Fiber Type</option>
+                            <option value="0">Select the Fiber Type </option>
                             {
                                 fibers.map(fiber => {
                                     return <option value={fiber.id} key={
@@ -267,9 +280,10 @@ export const YarnEdit = () => {
                 <Button variant="contained" color='secondary' onClick={(clickEvent) => handleSave(clickEvent)} >
                     Save
                 </Button>
-
-            </form>                 </ThemeProvider>
-
+                </form>     
+                </Card>
+            </Box>
+               </ThemeProvider>
     </>
     )
 }

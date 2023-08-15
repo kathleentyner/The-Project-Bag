@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getAllWeights, deleteWeight, addWeight } from '../../APIManagers/WeightManager';
-import { getAllFibers } from '../../APIManagers/FIberManager';
+import { getAllWeights } from '../../APIManagers/WeightManager';
+import { getAllFibers } from '../../APIManagers/FiberManager';
+import Stack from '@mui/material/Stack';
 
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -31,7 +32,7 @@ export const FiberAndWeight = () => {
     getWeights();
   }, []);
 
-  const create = () => {
+  const createWeight = () => {
     navigate("/weight/new")
   }
 
@@ -83,9 +84,12 @@ export const FiberAndWeight = () => {
             />
           </Box>
           <Typography variant="h5" align="center" color="text.secondary" paragraph>
-            Add fiber and weight tags to your projects and yarns to stay organized
+            Add fiber and weight categories to your projects and yarns to stay organized
           </Typography>
-        </Container>
+      
+      
+
+       </Container>
       </Box>
       <Grid container spacing={6}>
         <Grid item xs={6}>
@@ -100,34 +104,39 @@ color="#545454" paragraph>
         </Typography>
 
 
-        <Typography paddingLeft={6} paddingBottom={3} variant="h4" align="left" color="#545454" fontFamily={'sans-serif'} >
-              Fiber Types
+        <Typography paddingLeft={6} paddingBottom={3} variant="h5" align="left" color="#545454" fontFamily={'sans-serif'} >
+             My Fiber Types
               </Typography>
-         </Box>
+        
          {fibers.map((fiber) => {
           return (
             <section className="list" key={fiber.id}>
             <header>
             <Typography paddingLeft={6} paddingBottom={3} align="left" color="#545454" fontFamily={'sans-serif'} >
-
-                {fiber.name}
+            <Link to={`/fiber/${fiber.id}`}>{fiber.name}</Link>
+               
                 </Typography>
+           
                 </header>
                 </section>)
+                
   })
-} <Button onClick={createFiber} variant="contained" paddingLeft={8} padding={6} align="center" color='secondary'>
-              Add A New Fiber Category
+}     <Box m={1} display='flex' justifyContent='center' alignItems='center' >
+          <Button onClick={createFiber} variant="contained" m align="center" color='secondary'>
+              Add A New Fiber 
             </Button>
-
+            </Box>
+  </Box>
         </Grid>
-
+      
         <Grid item xs={6}>
-          <Box>    <Typography variant="body1" bgcolor='#F2EEE3' padding={5}
+          <Box>   
+             <Typography variant="body1" bgcolor='#F2EEE3' padding={5}
           color="#545454" paragraph>
             <p>A yarn's weight is important to understand in order to meet a pattern's gauge. Read on to learn more about choosing the right yarn for your project.</p>
             </Typography> 
           
-<Typography paddingLeft={6} paddingBottom={3} variant="h4" align="left" color="#545454" fontFamily={'sans-serif'} >
+<Typography paddingLeft={6} paddingBottom={3} variant="h5" align="left" color="#545454" fontFamily={'sans-serif'} >
 
 
 My Yarn Weights
@@ -135,7 +144,7 @@ My Yarn Weights
   </Typography> 
   
  
-  </Box>
+
   <Grid item xs={6}>
 
   {weights.map((weight) => {
@@ -144,15 +153,20 @@ My Yarn Weights
             <header>
               <Typography paddingLeft={6} paddingBottom={3} align="left" color="#545454" fontFamily={'sans-serif'} >
               
-                {weight.name}
+              <Link to={`/weight/${weight.id}`}>{weight.name}</Link>
                 </Typography>
+            
                 </header>
                 </section>)
   })
-}  <Button onClick={create} variant="contained" paddingLeft={8} padding={6} align="center" color='secondary' >
-              Add A New Weight
-            </Button>
+}  
             </Grid>
+            </Box>
+            <Box m={1} display='flex' justifyContent='center' alignItems='center' marginLeft={10}>
+
+<Button onClick={createWeight} variant="contained" palign="center" color='secondary'>
+  Add A New Yarn Weight
+</Button></Box>
 <Grid>
 
          
@@ -162,14 +176,17 @@ My Yarn Weights
       <Box
             sx={{
               display: 'flex',
-              justifyContent: "center"
+              justifyContent: "center",
+              margin:4
             }}
           >
             <img
               alt='yarn weight chart'
+              width={1200}
               src={gauge}
               align='center'
               paddingBottom={6}
+              
             />
             </Box>
     </ThemeProvider>

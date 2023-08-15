@@ -14,7 +14,6 @@ import Container from "@mui/material/Container";
 
 export const WeightDetails = () => {
     const [weight, setWeight] = useState();
-    const [showAlert, setShowAlert] = useState(false)
     const { id } = useParams();
     const navigate = useNavigate();
    
@@ -29,39 +28,20 @@ export const WeightDetails = () => {
     }
     
   
-    const handleDelete = () => {
-      deleteWeight(weight.id).then(() => {
-        setShowAlert(false)
-        navigate(`/weight`)
-      });
-    };
-  
-    const handleCancel = () => {
-      setShowAlert(false) 
-    }
-  
-    const deleteWeightAlert = () => {
-      return (<>
-      <Alert color="danger" key={'danger'}>
-        Are you sure you want to delete this yarn weight?
-        <br></br><Link onClick={handleDelete}>Yes</Link> / <Link onClick={handleCancel}>No</Link>
-      </Alert>
-      </>)
-    }
-    
     const theme = createTheme({
-
       palette: {
-        primary: {
           light: '#0494AD',
           main: '#00768B',
           dark: '#015362',
-         
-        },
-      },
-    });
+       
+          background: {
+          default: '#F2EEE3',
+          },
     
-
+          secondary:{
+            main: "#00768B"
+          }
+    }});
 
     return (
       <ThemeProvider theme={theme}>
@@ -100,24 +80,19 @@ export const WeightDetails = () => {
         style={{ minHeight: '100vh' }}
        >
         <Grid item xs={3}>
-        <Card sx={{ maxWidth:800} }  display ="flex">
+        <Card sx={{ maxWidth:800, bgcolor: '#545454', } }  display ="flex">
   
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="h5" color='#F2EEE3'component="div">
           {weight.name}
         </Typography>
                
-    <Button
-        variant="contained"
-        align="center"
-        padding={1}
-        color="primary"
-        onClick={() => {
-          setShowAlert(true);      
-        }}> 
-        Delete
-      </Button>
-        {showAlert && deleteWeightAlert()}
+        <Button sx={{  margin: 3 }} variant="contained" 
+        padding={5} 
+        align="center" color='secondary' onClick={() => navigate(`/weight/edit/${weight.id}`)}>Edit</Button>
+     
+
+
 
       </CardContent>
 

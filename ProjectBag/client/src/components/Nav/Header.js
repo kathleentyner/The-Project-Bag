@@ -49,6 +49,7 @@ export const Header = () => {
                     <Tab textColor='primary' label="Projects" href="/project" />
                     <Tab textColor='primary' label="Yarn Stash" href="/yarn" />
                      <Tab textColor='primary' label ="Notions" href="/notions" />
+                     <Tab textColor='primary' label ="Resources" href="/resource" />
 
                     </Tabs>
                  

@@ -1,34 +1,42 @@
-import {useState} from "react"
-import {useNavigate} from "react-router-dom"
-
+import {useState, useEffect} from "react"
+import {useNavigate, useParams} from "react-router-dom"
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Button from '@mui/material/Button';
-import { addFiber } from "../../APIManagers/FiberManager";
+import { editFiber, getFiberById } from "../../APIManagers/FiberManager";
 import narrowlogo from '../Nav/narrowlogo.png';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 
 
-export const FiberForm = () => {
+
+export const FiberEdit = () => {
     const navigate = useNavigate()
+    const {fiberId} = useParams();
     const [fiber, update] = useState({
         name: "",
-        userId: 0
-     
+       userId: 0
+
     })
+    useEffect(() => {
+        getFiberById(fiberId)
+            .then((fiber) => {
+                update(fiber)
+            })
+    }, [fiberId]);
+    
     const handleSave = (event) => {
         event.preventDefault()
 
-        const fiberToAPI = {
+        const fiberToEdit = {
+            Id: parseInt(fiberId),
             Name: fiber.name,
-            UserId: 1
-          
+       
         }
-        return addFiber(fiberToAPI).then(navigate(`/notions`))
+        return editFiber(fiberToEdit).then(navigate(`/notions`))
     }
 
     const theme = createTheme({
@@ -46,7 +54,8 @@ export const FiberForm = () => {
           }
       }
   });
-  return (<>
+
+    return (<>
       <ThemeProvider theme={theme}>
           <CssBaseline />
 
@@ -83,7 +92,8 @@ export const FiberForm = () => {
                   spacing={2}
                   justifyContent="center"
                   > <Typography variant="h5" align="center" color="#545454" paragraph>
-New Fiber Category             </Typography>
+                      Edit Fiber Type
+                  </Typography>
               </Stack>
               </Container>
           </Box>
@@ -97,7 +107,7 @@ New Fiber Category             </Typography>
                   <form style={{ width: 600, }}>
                       <Typography variant="h6" align="center" color="#545454" paragraph>
 
-                          Fill out this field to add a new fiber category.
+                      Fill out this form to edit your fiber type.
                       </Typography>
                       < fieldset>
                     <div className="form-group">
@@ -116,15 +126,15 @@ New Fiber Category             </Typography>
                         }/>
                      </div>
                      </fieldset>
-                   
+                     
                 
-                 <Button color="primary" variant="contained" onClick={(clickEvent) => handleSave(clickEvent)} >
+                 <Button variant="contained" color="secondary" onClick={(clickEvent) => handleSave(clickEvent)} >
                   Submit
                  </Button>
-                 </form>
-</Card>
-</Box>
-                 </ThemeProvider>  
-              
+                   
+            </form>  
+            </Card>
+            </Box> 
+            </ThemeProvider>    
     </>
         )}

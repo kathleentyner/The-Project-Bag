@@ -9,9 +9,10 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Button from '@mui/material/Button';
-import { getAllFibers } from "../../APIManagers/FIberManager";
+import { getAllFibers } from "../../APIManagers/FiberManager";
 import { getAllWeights } from "../../APIManagers/WeightManager";
 import narrowlogo from '../Nav/narrowlogo.png'
+import Card from '@mui/material/Card';
 
 
 
@@ -104,43 +105,54 @@ export const YarnForm = () => {
                     pt: 8,
                     pb: 6,
                 }}
-         
+
                 display='flex'
                 alignItems='center'
                 justify='center'
->
-                    <Container >
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                justifyContent: "center"
-                            }}
-                        >
-                            <img
-                                alt='Project Bag logo'
-                                src={narrowlogo}
-                                width={800}
-                                align='center'    
+            >
+                <Container >
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent: "center"
+                        }}
+                    >
+                        <img
+                            alt='Project Bag logo'
+                            src={narrowlogo}
+                            width={800}
+                            align='center'
 
-                            />
-                        </Box>
-                        </Container>
-
-                   
-                    <Stack
-                        sx={{ pt: 4 }}
-                        direction="row"
-                        spacing={2}
-                        align='center'    
-                        > <Typography variant="h5" align="center" color="#545454" paragraph>
-                    Add to your stash!
-                </Typography>
-                    </Stack>
+                        />
+                    </Box>
+               
+                <Stack
+                    sx={{ pt: 4 }}
+                    direction="row"
+                    spacing={2}
+                    justifyContent="center"
+                    > <Typography variant="h5" align="center" color="#545454" paragraph>
+                        Add to your stash!
+                    </Typography>
+                </Stack>
+                </Container>
             </Box>
-            <form className="projectform">
-                <fieldset>
+            <Box
+                sx={{
+                    justifyContent: "center",
+                    display: "flex"
+                }}
+            >
+                <Card sx={{ bgcolor: '#F2EEE3', marginBottom: 10, padding: 5 }} bgcolor="#545454" >
+                    <form style={{ width: 600, }}>
+                        <Typography variant="h6" align="center" color="#545454" paragraph>
+
+                            Fill out this form to add a new yarn.
+                        </Typography>
+                        < fieldset>
+
                     <div className="form-group">
-                        <label htmlFor="description"><strong>Brand: </strong> </label>
+                        <label htmlFor="description">Brand:  </label>
                         <input
                             required autoFocus
                             type="text"
@@ -158,7 +170,7 @@ export const YarnForm = () => {
 
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description"><strong>Colorway: </strong> </label>
+                        <label htmlFor="description">Colorway:  </label>
                         <input
                             required autoFocus
                             type="text"
@@ -176,7 +188,7 @@ export const YarnForm = () => {
 
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description"><strong>Add a Photo Url: </strong> </label>
+                        <label htmlFor="description">Add a Photo Url: </label>
                         <input
                             required autoFocus
                             type="text"
@@ -193,7 +205,7 @@ export const YarnForm = () => {
                 </fieldset>
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description"><strong>Quantity: </strong> </label>
+                        <label htmlFor="description">Quantity:  </label>
                         <input
                             required autoFocus
                             type="text"
@@ -265,7 +277,10 @@ export const YarnForm = () => {
                     Submit
                 </Button>
 
-            </form>        </ThemeProvider>
+            </form>     
+                </Card>
+            </Box>
+               </ThemeProvider>
     </>
     )
 }

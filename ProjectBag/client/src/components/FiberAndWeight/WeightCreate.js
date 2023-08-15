@@ -7,6 +7,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Button from '@mui/material/Button';
 import { addWeight } from "../../APIManagers/WeightManager";
+import narrowlogo from '../Nav/narrowlogo.png';
+import Card from '@mui/material/Card';
+import Stack from '@mui/material/Stack';
 
 
 
@@ -29,48 +32,78 @@ export const WeightForm = () => {
     }
 
     const theme = createTheme({
-
       palette: {
-        primary: {
           light: '#0494AD',
           main: '#00768B',
           dark: '#015362',
-         
-        },  },
-    });
-    
 
+          background: {
+              default: '#F2EEE3',
+          },
 
-    return ( <>
-        <ThemeProvider theme={theme}>
+          secondary: {
+              main: "#00768B"
+          }
+      }
+  });
+
+    return (<>
+      <ThemeProvider theme={theme}>
           <CssBaseline />
-    
-            <Box
-          sx={{
-            bgcolor: '#F2EEE3',
-            pt: 8,
-            pb: 6,
-            color: "#545454"
-          }}
-        >
-              <Container maxWidth="lg">
-                <Typography
-                  component="h1"
-                  variant="h2"
-                  align="center"
-                  color="#545454"
-                  gutterBottom
-                >
-                 New Yarn Weight
-                </Typography>
-                
+
+          <Box
+              sx={{
+                  bgcolor: '#F2EEE3',
+                  pt: 8,
+                  pb: 6,
+              }}
+
+              display='flex'
+              alignItems='center'
+              justify='center'
+          >
+              <Container >
+                  <Box
+                      sx={{
+                          display: 'flex',
+                          justifyContent: "center"
+                      }}
+                  >
+                      <img
+                          alt='Project Bag logo'
+                          src={narrowlogo}
+                          width={800}
+                          align='center'
+
+                      />
+                  </Box>
+             
+              <Stack
+                  sx={{ pt: 4 }}
+                  direction="row"
+                  spacing={2}
+                  justifyContent="center"
+                  > <Typography variant="h5" align="center" color="#545454" paragraph>
+                      New Yarn Weight Category
+                  </Typography>
+              </Stack>
               </Container>
-            </Box>         
-        
-              <form className="projectform">
-              <fieldset>
+          </Box>
+          <Box
+              sx={{
+                  justifyContent: "center",
+                  display: "flex"
+              }}
+          >
+              <Card sx={{ bgcolor: '#F2EEE3', marginBottom: 10, padding: 5 }} bgcolor="#545454" >
+                  <form style={{ width: 600, }}>
+                      <Typography variant="h6" align="center" color="#545454" paragraph>
+
+                          Fill out this field to add a new yarn weight.
+                      </Typography>
+                      < fieldset>
                     <div className="form-group">
-                        <label htmlFor="description"><strong>Yarn Weight: </strong> </label>
+                        <label htmlFor="description">Yarn Weight: </label>
                         <input
                             required autoFocus
                             type="text"
@@ -91,7 +124,9 @@ export const WeightForm = () => {
                   Submit
                  </Button>
                    
-            </form>   
+            </form>  
+            </Card>
+            </Box> 
             </ThemeProvider>    
     </>
         )}

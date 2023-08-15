@@ -1,34 +1,42 @@
-import {useState} from "react"
-import {useNavigate} from "react-router-dom"
-
+import {useState, useEffect} from "react"
+import {useNavigate, useParams} from "react-router-dom"
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Button from '@mui/material/Button';
-import { addFiber } from "../../APIManagers/FiberManager";
+import { editWeight, getWeightById } from "../../APIManagers/WeightManager";
 import narrowlogo from '../Nav/narrowlogo.png';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 
 
-export const FiberForm = () => {
+
+export const WeightEdit = () => {
     const navigate = useNavigate()
-    const [fiber, update] = useState({
+    const {weightId} = useParams();
+    const [weight, update] = useState({
         name: "",
-        userId: 0
-     
+       userId: 0
+
     })
+    useEffect(() => {
+        getWeightById(weightId)
+            .then((weight) => {
+                update(weight)
+            })
+    }, [weightId]);
+    
     const handleSave = (event) => {
         event.preventDefault()
 
-        const fiberToAPI = {
-            Name: fiber.name,
-            UserId: 1
-          
+        const weightToEdit = {
+            Id: parseInt(weightId),
+            Name: weight.name,
+       
         }
-        return addFiber(fiberToAPI).then(navigate(`/notions`))
+        return editWeight(weightToEdit).then(navigate(`/notions`))
     }
 
     const theme = createTheme({
@@ -46,7 +54,8 @@ export const FiberForm = () => {
           }
       }
   });
-  return (<>
+
+    return (<>
       <ThemeProvider theme={theme}>
           <CssBaseline />
 
@@ -83,7 +92,8 @@ export const FiberForm = () => {
                   spacing={2}
                   justifyContent="center"
                   > <Typography variant="h5" align="center" color="#545454" paragraph>
-New Fiber Category             </Typography>
+                      Edit Yarn Weight
+                  </Typography>
               </Stack>
               </Container>
           </Box>
@@ -97,34 +107,34 @@ New Fiber Category             </Typography>
                   <form style={{ width: 600, }}>
                       <Typography variant="h6" align="center" color="#545454" paragraph>
 
-                          Fill out this field to add a new fiber category.
+                      Fill out this form to edit your yarn weight.
                       </Typography>
                       < fieldset>
                     <div className="form-group">
-                        <label htmlFor="description">Fiber Type: </label>
+                        <label htmlFor="description">Yarn Weight: </label>
                         <input
                             required autoFocus
                             type="text"
                             className="form-control"
-                            value={fiber.name}
+                            value={weight.name}
                             onChange={ 
                                 (event) => {
-                                const copy = {...fiber} 
+                                const copy = {...weight} 
                                 copy.name = event.target.value 
                                 update(copy)
                             } 
                         }/>
                      </div>
                      </fieldset>
-                   
+                     
                 
-                 <Button color="primary" variant="contained" onClick={(clickEvent) => handleSave(clickEvent)} >
+                 <Button variant="contained" color="secondary" onClick={(clickEvent) => handleSave(clickEvent)} >
                   Submit
                  </Button>
-                 </form>
-</Card>
-</Box>
-                 </ThemeProvider>  
-              
+                   
+            </form>  
+            </Card>
+            </Box> 
+            </ThemeProvider>    
     </>
         )}

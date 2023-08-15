@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
 import { useEffect, useState, } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { getAllFibers} from '../../APIManagers/FIberManager';
+import { getAllFibers} from '../../APIManagers/FiberManager';
 import CssBaseline from '@mui/material/CssBaseline';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
