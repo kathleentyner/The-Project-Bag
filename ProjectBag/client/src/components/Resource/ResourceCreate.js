@@ -9,7 +9,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Button from '@mui/material/Button';
-
+import narrowlogo from '../Nav/narrowlogo.png';
+import Card from '@mui/material/Card';
 
 
 
@@ -55,43 +56,63 @@ export const ResourceForm = () => {
       }});
     
         return ( <>
-    <ThemeProvider theme={theme}>
-              <CssBaseline />
-        
-                <Box
-              sx={{        
-                bgcolor: '#F2EEE3',
-                pt: 8,
-                pb: 6,
+<ThemeProvider theme={theme}>
+          <CssBaseline />
+
+          <Box
+              sx={{
+                  bgcolor: '#F2EEE3',
+                  pt: 8,
+                  pb: 6,
               }}
-            >
-                  <Container maxWidth="lg">
-                    <Typography
-                      component="h1"
-                      variant="h2"
-                      align="center"
-                      color="#545454"
-    
-                      gutterBottom
-                    >
-                Get Inspired
-                </Typography>
-                <Typography variant="h5" align="center" color="#545454"  paragraph>
-                Add a resource to your library
-                </Typography>
-                <Stack
+
+              display='flex'
+              alignItems='center'
+              justify='center'
+          >
+              <Container >
+                  <Box
+                      sx={{
+                          display: 'flex',
+                          justifyContent: "center"
+                      }}
+                  >
+                      <img
+                          alt='Project Bag logo'
+                          src={narrowlogo}
+                          width={800}
+                          align='center'
+
+                      />
+                  </Box>
+             
+              <Stack
                   sx={{ pt: 4 }}
                   direction="row"
                   spacing={2}
                   justifyContent="center"
-                >
-                </Stack>
+                  > <Typography variant="h5" align="center" color="#545454" paragraph>
+                Add a resource to your library
+                </Typography>
+              </Stack>
               </Container>
-            </Box>         
-              <form className="projectform">
-              <fieldset>
+          </Box>
+          <Box
+              sx={{
+                  justifyContent: "center",
+                  display: "flex"
+              }}
+          >
+              <Card sx={{ bgcolor: '#F2EEE3', marginBottom: 10, padding: 5 }} bgcolor="#545454" >
+                  <form style={{ width: 600, }}>
+                      <Typography variant="h6" align="center" color="#545454" paragraph>
+
+                          Fill out this form to add a new resource.
+                      </Typography>
+
+                      <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description"><strong>Type: </strong> </label>
+                        <label htmlFor="description">Type: </label>
                         <input
                             required autoFocus
                             type="text"
@@ -108,7 +129,7 @@ export const ResourceForm = () => {
                      </fieldset>
                      <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description"><strong>Title: </strong> </label>
+                        <label htmlFor="title">Title:  </label>
                         <input
                             required autoFocus
                             type="text"
@@ -125,7 +146,7 @@ export const ResourceForm = () => {
                      </fieldset>
                  <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description"><strong>Description: </strong> </label>
+                        <label htmlFor="description">Description: </label>
                         <input
                             required autoFocus
                             type="text"
@@ -143,7 +164,7 @@ export const ResourceForm = () => {
 
                      <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description"><strong>Add A Link: </strong> </label>
+                        <label htmlFor="description">Add a Link: </label>
                         <input
                             required autoFocus
                             type="text"
@@ -164,7 +185,9 @@ export const ResourceForm = () => {
                   Submit
                  </Button>
                    
-            </form>                 </ThemeProvider>    
-
+            </form>                 
+            </Card>
+</Box>
+</ThemeProvider>    
     </>
         )}

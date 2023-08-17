@@ -15,7 +15,6 @@ import CardMedia from '@mui/material/CardMedia';
 import narrowlogo from '../Nav/narrowlogo.png'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { CardActionArea } from '@mui/material';
 
 
 export const YarnList = () => {
@@ -156,7 +155,7 @@ export const YarnList = () => {
 
 
                       <Card sx={{ maxWidth: 200, bgcolor: '#F2EEE3' }} key={yarn.id} >
-                        <CardActionArea>
+                      
                           <CardMedia
                             component='img'
                             height='150'
@@ -179,7 +178,7 @@ export const YarnList = () => {
                               View
                             </Button>
                           </CardContent>
-                        </CardActionArea>
+                  
                       </Card>
 
                     ))}
@@ -196,8 +195,8 @@ export const YarnList = () => {
                 flexDirection: 'row',
                 '& > :not(style)': {
                   m: 1,
-                  width: 400,
-                  height: 350,
+                  width: 600,
+              height: 350,
                   paddingBottom: 20,
 
                 },
@@ -206,8 +205,8 @@ export const YarnList = () => {
 
               {yarn.map((yarn) => (
 
-                  <Card sx={{ maxWidth: 400, bgcolor: '#545454' }} key={yarn.id}  >
-                    <CardActionArea>
+                  <Card sx={{ maxWidth: 350, bgcolor: '#545454' }} key={yarn.id}  >
+             
 
                       <CardContent>
                         <CardMedia
@@ -229,7 +228,7 @@ export const YarnList = () => {
                           onClick={() => navigate(`/yarn/${yarn.id}`)}>View
                           </Button>
                       </CardContent>
-                    </CardActionArea>
+                
                   </Card>
                ))}
                 </Box>

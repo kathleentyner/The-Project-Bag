@@ -81,17 +81,23 @@ export const Home = () => {
       >
         <Box>
           <img
-            alt="yarn weight chart"
+            alt="projectlogo"
             src={projects}
             width={200}
             align="center"
             paddingBottom={6}
-          />
+          />  
+ <Box
+      sx={{
+        display: 'flex',
+        justifyContent: "center"
+      }}
+    >
           <Button color="secondary" align='center' href="/project" variant="contained">
             On the Needles
           </Button>
-        </Box>
-
+          </Box>
+          </Box>
         <Box>
           <img
             alt="yarn weight chart"
@@ -99,10 +105,16 @@ export const Home = () => {
             align="center"
             width={200}
             paddingBottom={6}
-          />
+          /><Box
+          sx={{
+            display: 'flex',
+            justifyContent: "center"
+          }}
+        >
           <Button color="secondary" position='center' href="/yarn" variant="contained">
             View Your Stash
           </Button>
+          </Box>
         </Box>
 
         <Box>
@@ -112,10 +124,16 @@ export const Home = () => {
             width={200}
             align="center"
             paddingBottom={6}
-          />
+          /><Box
+          sx={{
+            display: 'flex',
+            justifyContent: "center"
+          }}
+        >
           <Button color="secondary" align='center'  href="/resources" variant="contained">
             Get Inspired
           </Button>
+          </Box>
         </Box>
       </Container>
     </ThemeProvider>

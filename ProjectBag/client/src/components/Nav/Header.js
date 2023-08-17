@@ -45,11 +45,11 @@ export const Header = () => {
 
                   <Tabs value={value} onChange={handleChange} centered color='primary'  indicatorColor="primary" textColor='primary'
 >
-                    <Tab textColor='primary' label="Home" color="main" href="/" />
-                    <Tab textColor='primary' label="Projects" href="/project" />
-                    <Tab textColor='primary' label="Yarn Stash" href="/yarn" />
-                     <Tab textColor='primary' label ="Notions" href="/notions" />
-                     <Tab textColor='primary' label ="Resources" href="/resource" />
+                    <Tab style={{ color: '#F2EEE3'}} label="Home" color="main" href="/" />
+                    <Tab style={{ color: '#F2EEE3'}}  label="Projects" href="/project" />
+                    <Tab style={{ color: '#F2EEE3'}} label="Yarn Stash" href="/yarn" />
+                     <Tab style={{ color: '#F2EEE3'}} label ="Notions" href="/notions" />
+                     <Tab style={{ color: '#F2EEE3'}}  label ="Resources" href="/resource" />
 
                     </Tabs>
                  

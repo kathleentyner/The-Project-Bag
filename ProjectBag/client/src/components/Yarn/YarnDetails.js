@@ -68,6 +68,10 @@ export const YarnDetails = () => {
           default: '#F2EEE3',
           },
     
+          primary: {
+            main: "#545454"
+          },
+
           secondary:{
             main: "#00768B"
           }
@@ -163,7 +167,7 @@ export const YarnDetails = () => {
         padding={5} 
         align="center" color='secondary'  onClick={() => navigate(`/yarn/edit/${yarn.id}`)}>Edit</Button>
      
-     <> <Button sx={{  margin: 3, }} variant="contained" color='secondary'
+     <> <Button sx={{  margin: 3, }}  variant="contained" color='primary'
         align="left"
         padding={5}
        

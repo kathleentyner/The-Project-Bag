@@ -18,13 +18,11 @@ import { YarnEdit } from "../Yarn/YarnEdit"
 import { ProjectEdit } from "../Projects/ProjectEdit"
 import { ResourceEdit } from "../Resource/ResourceEdit";
 import { ResourceForm } from "../Resource/ResourceCreate";
-import { ResourceDetails } from "../Resource/ResourceDetails";
 import { ResourceList } from "../Resource/ResourceList";
 import { FiberAndWeight } from "../FiberAndWeight/FiberAndWeight";
 import { FiberEdit } from "../FiberAndWeight/FiberEdit";
 import { WeightEdit } from "../FiberAndWeight/WeightEdit";
-
-
+import { Login } from "../User/UserLogin"
 
 export const ApplicationViews =() => {
 
@@ -32,6 +30,7 @@ export const ApplicationViews =() => {
         <Routes>
     
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login/>} />
           <Route path="/project" element={<ProjectList /> } />      
           <Route path="/project/:id" element = {<ProjectDetails />} />
           <Route path="/project/new" element = {<ProjectForm />} />
@@ -48,7 +47,6 @@ export const ApplicationViews =() => {
           <Route path ="/yarn/edit/:yarnId" element = {<YarnEdit />} />
           <Route path ="/project/edit/:projectId" element = {<ProjectEdit />} />
           <Route path="/resource" element={<ResourceList /> } />      
-          <Route path="/resource/:id" element = {<ResourceDetails />} />
           <Route path="/resource/new" element = {<ResourceForm />} />
           <Route path ="/resource/edit/:resourceId" element = {<ResourceEdit />} />
           <Route path="/notions" element={<FiberAndWeight /> } />      
